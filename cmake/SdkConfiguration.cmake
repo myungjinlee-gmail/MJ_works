@@ -52,6 +52,14 @@ function(sdk_require_one_of variable allowed_values)
     endif()
 endfunction()
 
+function(sdk_add_existing_subdirectory subdirectory)
+    if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${subdirectory}/CMakeLists.txt")
+        message(FATAL_ERROR "CMake subdirectory not found: ${CMAKE_CURRENT_SOURCE_DIR}/${subdirectory}")
+    endif()
+
+    add_subdirectory("${subdirectory}")
+endfunction()
+
 function(sdk_normalize_configuration)
     set(sdk_hw_allowed vanila vanilla nvidia arm)
     set(sdk_os_allowed linux windows)

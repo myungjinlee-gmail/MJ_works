@@ -47,3 +47,13 @@ SDK_DISPLAY_TARGET : raw
 
 Values passed with `-D` override values loaded from YAML. `vanila` is accepted as
 an alias for the canonical `vanilla` target.
+
+## Folder Tree
+
+- `docs/design`: design documents such as SWRS, SWAD, and coding guideline.
+- `docs/template`: skeleton, example, and rule documents for design docs, C++ code, and test code.
+- `cmake`: common CMake functions and helpers.
+- `configuration`: YAML-based CMake configuration files.
+- `customer_project`: customer-facing integration projects.
+- `include`: public SDK headers.
+- `src`: internal SDK library implementation.

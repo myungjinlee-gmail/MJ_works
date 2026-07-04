@@ -71,7 +71,18 @@ function(sdk_normalize_configuration)
     endif()
 
     set(os_canonical "${SDK_OS_TARGET}")
+    set(capture_canonical "${SDK_CAPTURE_TARGET}")
+    if(capture_canonical STREQUAL "raw")
+        set(capture_canonical "raw_file")
+    endif()
+
+    set(display_canonical "${SDK_DISPLAY_TARGET}")
+    if(display_canonical STREQUAL "raw")
+        set(display_canonical "raw_file")
+    endif()
 
     set(SDK_HW_TARGET_CANONICAL "${hw_canonical}" CACHE INTERNAL "Canonical HW target")
     set(SDK_OS_TARGET_CANONICAL "${os_canonical}" CACHE INTERNAL "Canonical OS target")
+    set(SDK_CAPTURE_TARGET_CANONICAL "${capture_canonical}" CACHE INTERNAL "Canonical capture target")
+    set(SDK_DISPLAY_TARGET_CANONICAL "${display_canonical}" CACHE INTERNAL "Canonical display target")
 endfunction()

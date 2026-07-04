@@ -46,7 +46,8 @@ SDK_DISPLAY_TARGET : raw
 ```
 
 Values passed with `-D` override values loaded from YAML. `vanila` is accepted as
-an alias for the canonical `vanilla` target.
+an alias for the canonical `vanilla` target. `raw` is accepted as an alias for
+the canonical `raw_file` capture and display target.
 
 ## Folder Tree
 
@@ -57,3 +58,5 @@ an alias for the canonical `vanilla` target.
 - `customer_project`: customer-facing integration projects.
 - `include`: public SDK headers.
 - `src`: internal SDK library implementation.
+- `testcases`: GoogleTest-based test skeletons.
+- `tools`: development helper tools.

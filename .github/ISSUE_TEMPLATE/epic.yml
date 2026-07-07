@@ -1,0 +1,32 @@
+name: Epic
+description: Define a high-level internal development plan.
+title: "[Epic] "
+labels: ["type:epic"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe summary of this epic.
+      placeholder: |
+        - Describe the background, problem, or motivation.
+        - Describe the development goal.
+        - Define what is included and excluded.(optional)
+          - In scope:
+            - 
+          - Out of scope:
+            - 
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Sub-Issues / Tasks
+      description: List child tasks. Convert them to sub-issues if needed.
+      placeholder: |
+        - 
+        - 
+        - 
+    validations:
+      required: true

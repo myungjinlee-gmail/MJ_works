@@ -1,0 +1,85 @@
+name: Task
+description: Track an internal development task.
+title: "[Task] "
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose
+      description: Describe why this task is needed and what outcome it should achieve.
+      placeholder: |
+        - Why is this task needed?
+        - What should be true when this task is complete?
+    validations:
+      required: true
+
+  - type: textarea
+    id: known-impact
+    attributes:
+      label: Known impact
+      description: Specify the concrete files, functions, tests, and user-facing surfaces that need to be changed or verified.
+      placeholder: |
+        - Files to change:
+          - Example: src/parser/ConfigParser.cpp
+          - Example: src/parser/ConfigParser.hpp
+
+        - Functions/classes/modules to change:
+          - Example: ConfigParser::parse()
+          - Example: ConfigParser class
+
+        - Test files:
+          - Example: testcases/parser/ConfigParserTest.cpp
+          - Example: testcases/parser/config_parser_cases.json
+
+        - Affected CLI commands/libraries/jobs:
+          - Example: bin/config-validator
+          - Example: libmj_config.a
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed-requirements
+    attributes:
+      label: Detailed requirements
+      description: List the specific requirements that must be implemented.
+      placeholder: |
+        - 
+        - 
+        - 
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification-acceptance
+    attributes:
+      label: Verification and acceptance
+      description: Describe the required tests, verification steps, and acceptance criteria.
+      placeholder: |
+        - Unit tests written and passing:
+          - Example: testcases/parser/ConfigParserTest.cpp
+          - Example: Verify success and error cases for ConfigParser::parse()
+
+        - Acceptance tests written and passing:
+          - Example: testcases/acceptance/config_validator_test.cpp
+          - Example: Running bin/config-validator with a valid config exits with code 0 and prints the expected output
+
+        - Additional verification:
+          - Example: CMake build completes successfully
+          - Example: Existing regression tests pass
+          - Example: Manual CLI scenario completed
+          - Example: Logs/monitoring metrics reviewed
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: List schedule, technical, operational, or policy constraints.
+      placeholder: |
+        - Schedule constraints:
+        - Technical constraints:
+        - Out of scope / must not change:
+    validations:
+      required: true

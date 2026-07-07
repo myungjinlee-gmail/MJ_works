@@ -1,0 +1,51 @@
+name: Bug
+description: Report and track a defect.
+title: "[Bug] "
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the problem.
+      placeholder: |
+        - Describe what is wrong.
+          - Describe the expected and actual behavior.
+          - Describe the actual behavior.
+        - Describe Environment
+          - cmake : cmake -S . -B build -DSDK_CONFIG=configuration/default.yaml
+          - build : cd build && make
+          - execution : ./build/mj_reference_app
+          - Commit/branch: main/hash
+          - Same as parent issue.
+        - Describe how to reproduce the issue.
+          1.
+          2.
+          3.
+          Same as parent issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: analysis
+    attributes:
+      label: Analysis
+      description: Fill this during investigation.(Assignee's responsibility)
+      placeholder: |
+        - Suspected cause:
+        - Root cause:
+        - Affected modules:
+    validations:
+      required: false
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Describe how the fix will be or was verified.(Assignee's responsibility)
+      placeholder: |
+        - Test:
+        - Result:
+        - Evidence:
+    validations:
+      required: false

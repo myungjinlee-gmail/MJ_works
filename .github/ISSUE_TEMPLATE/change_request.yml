@@ -1,0 +1,46 @@
+name: Change Request
+description: Track an external change request.
+title: "[CR] "
+labels: ["type:cr"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the requested change.
+      placeholder: |
+        ### Requested Change.
+        - Current behavior:
+        - Requested behavior:
+        - Constraints:
+        ### Requested Source
+        - Customer/Project:
+        - Describe where this request came from.
+        ### Background
+        - Describe the background and reason for the change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact Analysis
+      description: Describe affected areas.(Assignee's responsibility)
+      placeholder: |
+        - Affected requirement:
+        - Affected architecture:
+        - Affected modules:
+        - Affected tests:
+        - Compatibility concern:
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Define when this request can be considered done.(QA's responsibility)
+      placeholder: |
+        - pass requirement based test.
+    validations:
+      required: false

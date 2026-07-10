@@ -5,6 +5,26 @@ project(MJSDK
     LANGUAGES CXX
 )
 
+option(SDK_RUN_DEV_SETUP "Run development environment setup during configure" ON)
+
+if(SDK_RUN_DEV_SETUP)
+    find_program(BASH_EXECUTABLE bash)
+
+    if(NOT BASH_EXECUTABLE)
+        message(FATAL_ERROR "bash is required to run scripts/setup_dev.sh")
+    endif()
+
+    execute_process(
+        COMMAND "${BASH_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/scripts/setup_dev.sh"
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+        RESULT_VARIABLE SDK_DEV_SETUP_RESULT
+    )
+
+    if(NOT SDK_DEV_SETUP_RESULT EQUAL 0)
+        message(FATAL_ERROR "scripts/setup_dev.sh failed")
+    endif()
+endif()
+
 include(cmake/SdkConfiguration.cmake)
 
 set(SDK_CONFIG "configuration/default.yaml" CACHE FILEPATH "SDK configuration yaml file")

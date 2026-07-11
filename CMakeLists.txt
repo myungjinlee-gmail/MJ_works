@@ -50,6 +50,14 @@ add_subdirectory(customer_project)
 
 if(SDK_ENABLE_TESTS)
     enable_testing()
+
+    set(INSTALL_GTEST OFF CACHE BOOL "Disable GoogleTest installation" FORCE)
+    add_subdirectory(
+        "${PROJECT_SOURCE_DIR}/third_party/google_test"
+        "${PROJECT_BINARY_DIR}/third_party/google_test"
+        EXCLUDE_FROM_ALL
+    )
+
     add_subdirectory(testcases)
 endif()
 

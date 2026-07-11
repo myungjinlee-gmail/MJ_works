@@ -1,6 +1,19 @@
+include(GoogleTest)
+
 add_subdirectory(src)
 add_subdirectory(sdk)
 add_subdirectory(customer_project)
+
+add_executable(google_test_smoke_test
+    google_test_smoke_test.cpp
+)
+
+target_link_libraries(google_test_smoke_test
+    PRIVATE
+        GTest::gtest_main
+)
+
+gtest_discover_tests(google_test_smoke_test)
 
 find_program(TEST_BASH_EXECUTABLE bash)
 

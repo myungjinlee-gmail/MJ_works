@@ -1,4 +1,8 @@
 build*
+# Keep the vendored GoogleTest source visible to Git.
+third_party/google_test/
+third_party/google_test/**
+
 AGENTS.md
 .venv/
-thirdparty/plantuml/*.jar
+third_party/plantuml/*.jar

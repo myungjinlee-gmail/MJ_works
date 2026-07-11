@@ -134,7 +134,7 @@ commits are checked by `githooks/commit-msg`.
 PlantUML is documentation-only and is not installed by the bootstrap script.
 The pinned JAR download, checksum verification, Java check, and future SVG
 generation commands are documented in
-[`thirdparty/plantuml/README.md`](thirdparty/plantuml/README.md).
+[`third_party/plantuml/README.md`](third_party/plantuml/README.md).
 
 ## Folder Tree
 

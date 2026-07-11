@@ -31,23 +31,23 @@ The repository pins PlantUML 1.2026.6. Download the executable JAR from the
 official release while in the repository root:
 
 ```bash
-mkdir -p thirdparty/plantuml
+mkdir -p third_party/plantuml
 curl -fL \
   https://github.com/plantuml/plantuml/releases/download/v1.2026.6/plantuml.jar \
-  -o thirdparty/plantuml/plantuml.jar
+  -o third_party/plantuml/plantuml.jar
 ```
 
 Verify the downloaded artifact:
 
 ```bash
-echo "89948f14c93756c7a3fb7b69078ff37e8489fd79dd430c582b931e2f65358690  thirdparty/plantuml/plantuml.jar" \
+echo "89948f14c93756c7a3fb7b69078ff37e8489fd79dd430c582b931e2f65358690  third_party/plantuml/plantuml.jar" \
   | sha256sum --check
 ```
 
 Check PlantUML:
 
 ```bash
-java -jar thirdparty/plantuml/plantuml.jar -version
+java -jar third_party/plantuml/plantuml.jar -version
 ```
 
 ## Install Graphviz
@@ -68,7 +68,7 @@ Verify the executable and let PlantUML test it:
 
 ```bash
 dot -V
-java -jar thirdparty/plantuml/plantuml.jar -testdot
+java -jar third_party/plantuml/plantuml.jar -testdot
 ```
 
 PlantUML normally finds `/usr/bin/dot` automatically. If Graphviz is installed
@@ -76,7 +76,7 @@ in another location, set its path explicitly:
 
 ```bash
 export GRAPHVIZ_DOT="$(command -v dot)"
-java -jar thirdparty/plantuml/plantuml.jar -testdot
+java -jar third_party/plantuml/plantuml.jar -testdot
 ```
 
 If `dot` exists but reports a plugin configuration problem, rebuild its plugin
@@ -84,7 +84,7 @@ configuration and test again:
 
 ```bash
 sudo dot -c
-java -jar thirdparty/plantuml/plantuml.jar -testdot
+java -jar third_party/plantuml/plantuml.jar -testdot
 ```
 
 The successful test output should report the Graphviz version and end with
@@ -93,8 +93,8 @@ The successful test output should report the Graphviz version and end with
 Generate SVG files from a PlantUML source file or directory:
 
 ```bash
-java -jar thirdparty/plantuml/plantuml.jar -tsvg path/to/diagram.puml
-java -jar thirdparty/plantuml/plantuml.jar -tsvg path/to/diagrams
+java -jar third_party/plantuml/plantuml.jar -tsvg path/to/diagram.puml
+java -jar third_party/plantuml/plantuml.jar -tsvg path/to/diagrams
 ```
 
 The downloaded JAR is intentionally ignored by Git. This document, the pinned

@@ -1,2 +1,4 @@
 build*
 AGENTS.md
+.venv/
+thirdparty/plantuml/*.jar

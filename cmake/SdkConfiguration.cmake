@@ -32,9 +32,28 @@ function(sdk_load_configuration yaml_file)
         string(STRIP "${value}" value)
         string(REGEX REPLACE "^['\"]|['\"]$" "" value "${value}")
 
+        set(yaml_value_variable "SDK_YAML_VALUE_${key}")
+        set(apply_yaml_value FALSE)
+
         if(NOT DEFINED ${key})
-            set(${key} "${value}" CACHE STRING "SDK configuration value from ${yaml_file}")
+            set(apply_yaml_value TRUE)
+        elseif(DEFINED ${yaml_value_variable})
+            if("${${key}}" STREQUAL "${${yaml_value_variable}}")
+                set(apply_yaml_value TRUE)
+            endif()
+        else()
+            get_property(cache_type CACHE "${key}" PROPERTY TYPE)
+            if(NOT cache_type STREQUAL "UNINITIALIZED")
+                # Migrate cache entries created by older versions of the loader.
+                set(apply_yaml_value TRUE)
+            endif()
         endif()
+
+        if(apply_yaml_value)
+            set(${key} "${value}" CACHE STRING "SDK configuration value from ${yaml_file}" FORCE)
+        endif()
+
+        set(${yaml_value_variable} "${value}" CACHE INTERNAL "Last YAML value for ${key}" FORCE)
     endforeach()
 endfunction()
 
@@ -50,6 +69,21 @@ function(sdk_require_one_of variable allowed_values)
         string(REPLACE ";" ", " allowed_values_text "${allowed_values}")
         message(FATAL_ERROR "${variable}=${value} is not supported. Allowed values: ${allowed_values_text}")
     endif()
+endfunction()
+
+function(sdk_define_boolean_option variable description default_value)
+    if(DEFINED ${variable})
+        set(value "${${variable}}")
+    else()
+        set(value "${default_value}")
+    endif()
+
+    string(TOUPPER "${value}" value)
+    if(NOT value STREQUAL "ON" AND NOT value STREQUAL "OFF")
+        message(FATAL_ERROR "${variable}=${value} is not supported. Allowed values: ON, OFF")
+    endif()
+
+    set(${variable} "${value}" CACHE BOOL "${description}" FORCE)
 endfunction()
 
 function(sdk_add_existing_subdirectory subdirectory)

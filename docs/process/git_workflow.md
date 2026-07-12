@@ -20,6 +20,8 @@ Branch naming:
 ## Merge Rule
 
 - Use Pull Request only.
+- The `CI` status check must pass before a Pull Request can be merged into `main`.
+- A Pull Request shall not be merged while `CI` is pending or failing.
 - Prefer Squash Merge to keep `main` history clean.
 - Delete branch after merge.
 - Each PR shall be linked to at least one GitHub Issue.

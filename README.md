@@ -1,5 +1,7 @@
 # MJ_works
 
+[![CI](https://github.com/myungjinlee-gmail/MJ_works/actions/workflows/ci.yml/badge.svg)](https://github.com/myungjinlee-gmail/MJ_works/actions/workflows/ci.yml)
+
 ## Build
 
 Development setup is explicit and is not run by a normal CMake configure.
@@ -8,7 +10,7 @@ Default configuration:
 
 ```bash
 cmake -S . -B build -DSDK_CONFIG=configuration/default.yaml
-cmake --build build
+cmake --build build --parallel
 ```
 
 Run the reference customer project executable:
@@ -21,7 +23,7 @@ Preset:
 
 ```bash
 cmake --preset default
-cmake --build --preset default
+cmake --build --preset default --parallel
 ```
 
 Override selected values from the command line:
@@ -32,7 +34,7 @@ cmake -S . -B build \
   -DSDK_HW_TARGET=vanilla \
   -DSDK_CAPTURE_TARGET=opencv \
   -DSDK_DISPLAY_TARGET=opencv
-cmake --build build
+cmake --build build --parallel
 ```
 
 Run development setup during configure only when explicitly requested:

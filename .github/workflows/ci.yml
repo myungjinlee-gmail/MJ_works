@@ -28,7 +28,7 @@ jobs:
               run: cmake --preset default
 
             - name: Build
-              run: cmake --build --preset default
+              run: cmake --build --preset default --parallel
 
             - name: Unit test
               run: ctest --test-dir build --output-on-failure

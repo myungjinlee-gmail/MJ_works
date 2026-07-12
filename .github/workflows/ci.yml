@@ -1,0 +1,40 @@
+---
+name: CI
+
+'on':
+    pull_request:
+        branches:
+            - main
+        types:
+            - opened
+            - synchronize
+            - reopened
+
+permissions:
+    contents: read
+
+jobs:
+    ci:
+        name: CI
+        runs-on: ubuntu-24.04
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+
+            - name: Configure
+              run: cmake --preset default
+
+            - name: Build
+              run: cmake --build --preset default
+
+            - name: Unit test
+              run: ctest --test-dir build --output-on-failure
+
+            - name: Integration test
+              run: echo "Integration test placeholder"
+
+            - name: Requirement test
+              run: echo "Requirement test placeholder"

@@ -1,5 +1,7 @@
 # MJ_works
 
+[![CI](https://github.com/myungjinlee-gmail/MJ_works/actions/workflows/ci.yml/badge.svg)](https://github.com/myungjinlee-gmail/MJ_works/actions/workflows/ci.yml)
+
 ## Build
 
 Development setup is explicit and is not run by a normal CMake configure.

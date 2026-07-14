@@ -129,7 +129,16 @@ yamllint --version
 
 Pinned environment versions are recorded in `configuration/dev-tools.env`.
 The commit message rule is defined in `docs/process/git_workflow.md`. Local
-commits are checked by `githooks/commit-msg`.
+commit messages are checked by `githooks/commit-msg`. Staged C/C++ content is
+automatically formatted by `githooks/pre-commit` before the commit is created.
+
+Check or automatically fix C/C++ formatting with the shared local and CI
+script:
+
+```bash
+bash scripts/format.sh --check
+bash scripts/format.sh --fix
+```
 
 ### Optional PlantUML
 

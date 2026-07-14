@@ -10,6 +10,8 @@ if [[ -z "${repo_root}" ]]; then
 fi
 
 git -C "${repo_root}" config core.hooksPath githooks
-chmod +x "${repo_root}/githooks/commit-msg"
+chmod +x \
+    "${repo_root}/githooks/commit-msg" \
+    "${repo_root}/githooks/pre-commit"
 
 echo "Git hooks path set to githooks."

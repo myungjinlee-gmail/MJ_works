@@ -1,0 +1,43 @@
+---
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterFunction: true
+    AfterControlStatement: Never
+    BeforeElse: true
+    BeforeCatch: true
+
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+SpaceBeforeParens: ControlStatements
+
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AlignAfterOpenBracket: AlwaysBreak
+
+IndentCaseLabels: true
+
+IncludeBlocks: Regroup
+
+FixNamespaceComments: true
+InsertBraces: true
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+ConstructorInitializerIndentWidth: 4
+BreakConstructorInitializers: BeforeComma

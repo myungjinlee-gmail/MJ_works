@@ -1,7 +1,7 @@
-#include <iostream>
-
 #include "customer1_api.hpp"
 #include "sdk_api.hpp"
+
+#include <iostream>
 
 namespace mj {
 namespace customer1 {
@@ -16,6 +16,7 @@ const char* name()
 
 int main()
 {
-    std::cout << mj::customer1::name() << " SDK version: " << mj::sdk::version() << std::endl;
+    std::cout << mj::customer1::name() << " SDK version: " << mj::sdk::version()
+              << std::endl;
     return 0;
 }

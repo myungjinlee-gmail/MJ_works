@@ -25,6 +25,8 @@ EOF
 cmake -S "${repo_root}" -B "${test_root}/yaml-build" \
     -DSDK_CONFIG="${config_file}" >/dev/null
 
+test -f "${test_root}/yaml-build/compile_commands.json"
+grep -Fq -- "-Werror" "${test_root}/yaml-build/compile_commands.json"
 grep -Fq "SDK_RUN_DEV_SETUP:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_ENABLE_TESTS:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 
@@ -47,6 +49,7 @@ cmake -S "${repo_root}" -B "${test_root}/override-build" \
     -DSDK_CONFIG="${config_file}" \
     -DSDK_ENABLE_TESTS=OFF >/dev/null
 
+test -f "${test_root}/override-build/compile_commands.json"
 grep -Fq "SDK_ENABLE_TESTS:BOOL=OFF" "${test_root}/override-build/CMakeCache.txt"
 
 # Simulate a cache created before YAML values were tracked internally.

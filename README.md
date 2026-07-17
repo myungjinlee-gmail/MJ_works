@@ -9,21 +9,17 @@ Development setup is explicit and is not run by a normal CMake configure.
 Default configuration:
 
 ```bash
-cmake -S . -B build -DSDK_CONFIG=configuration/default.yaml
-cmake --build build --parallel
+cmake --preset default
+cmake --build --preset default --parallel
 ```
+
+The default preset loads `configuration/default.yaml`, which enables tests with
+`SDK_ENABLE_TESTS : ON`.
 
 Run the reference customer project executable:
 
 ```bash
 ./build/customer_project/reference/mj_reference_app
-```
-
-Preset:
-
-```bash
-cmake --preset default
-cmake --build --preset default --parallel
 ```
 
 Override selected values from the command line:
@@ -139,6 +135,22 @@ script:
 bash scripts/format.sh --check
 bash scripts/format.sh --fix
 ```
+
+Run the same clang-tidy analysis used by CI after configuring and building the
+test-enabled project:
+
+```bash
+cmake --preset default
+cmake --build --preset default --parallel
+python3 scripts/clang_tidy.py --build-dir build
+```
+
+CMake always writes `compile_commands.json` to the selected build directory.
+Static-analysis directory exclusions are listed one repository-relative path
+per line in `configuration/clang-tidy-exclude.txt`. Compiled generated C/C++
+code remains included unless its directory is explicitly listed. The enabled
+checks, compiler-warning supplements, and known coverage limits are documented
+in [`docs/process/static_analysis.md`](docs/process/static_analysis.md).
 
 ### Optional PlantUML
 

@@ -1,0 +1,82 @@
+---
+Checks: >
+    -*,
+    bugprone-branch-clone,
+    bugprone-casting-through-void,
+    bugprone-copy-constructor-init,
+    bugprone-dangling-handle,
+    bugprone-easily-swappable-parameters,
+    bugprone-exception-escape,
+    bugprone-infinite-loop,
+    bugprone-incorrect-roundings,
+    bugprone-macro-parentheses,
+    bugprone-macro-repeated-side-effects,
+    bugprone-misplaced-widening-cast,
+    bugprone-multiple-statement-macro,
+    bugprone-narrowing-conversions,
+    bugprone-reserved-identifier,
+    bugprone-signed-char-misuse,
+    bugprone-sizeof-container,
+    bugprone-sizeof-expression,
+    bugprone-suspicious-include,
+    bugprone-suspicious-memory-comparison,
+    bugprone-suspicious-memset-usage,
+    bugprone-swapped-arguments,
+    bugprone-switch-missing-default-case,
+    bugprone-undefined-memory-manipulation,
+    bugprone-unused-raii,
+    bugprone-use-after-move,
+    bugprone-virtual-near-miss,
+    clang-analyzer-core.BitwiseShift,
+    clang-analyzer-core.CallAndMessage,
+    clang-analyzer-core.NullDereference,
+    clang-analyzer-core.UndefinedBinaryOperatorResult,
+    clang-analyzer-core.uninitialized.*,
+    clang-analyzer-cplusplus.InnerPointer,
+    clang-analyzer-cplusplus.NewDelete,
+    clang-analyzer-cplusplus.NewDeleteLeaks,
+    clang-analyzer-unix.MismatchedDeallocator,
+    cppcoreguidelines-avoid-const-or-ref-data-members,
+    cppcoreguidelines-init-variables,
+    cppcoreguidelines-macro-usage,
+    cppcoreguidelines-no-malloc,
+    cppcoreguidelines-owning-memory,
+    cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+    cppcoreguidelines-pro-bounds-constant-array-index,
+    cppcoreguidelines-pro-bounds-pointer-arithmetic,
+    cppcoreguidelines-pro-type-const-cast,
+    cppcoreguidelines-pro-type-cstyle-cast,
+    cppcoreguidelines-pro-type-member-init,
+    cppcoreguidelines-pro-type-reinterpret-cast,
+    cppcoreguidelines-slicing,
+    cppcoreguidelines-special-member-functions,
+    cppcoreguidelines-virtual-class-destructor,
+    modernize-use-nullptr,
+    modernize-use-override,
+    performance-no-int-to-ptr,
+    readability-braces-around-statements,
+    readability-implicit-bool-conversion,
+    readability-misleading-indentation,
+    readability-simplify-boolean-expr
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
+SystemHeaders: false
+FormatStyle: none
+ExtraArgs:
+    - '-Warray-bounds'
+    - '-Wconversion'
+    - '-Wimplicit-fallthrough'
+    - '-Wparentheses'
+    - '-Wpedantic'
+    - '-Wreorder'
+    - '-Wsign-compare'
+    - '-Wsign-conversion'
+    - '-Wtautological-compare'
+    - '-Wtautological-constant-compare'
+    - '-Wtype-limits'
+    - '-Wunsequenced'
+CheckOptions:
+    cppcoreguidelines-macro-usage.AllowedRegexp: '^$'
+    cppcoreguidelines-macro-usage.CheckCapsOnly: 'false'
+    cppcoreguidelines-macro-usage.IgnoreCommandLineMacros: 'true'
+...

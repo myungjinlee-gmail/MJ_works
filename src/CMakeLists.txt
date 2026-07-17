@@ -1,4 +1,5 @@
 add_library(mj_sdk SHARED)
+enable_compiler_warnings(mj_sdk)
 
 target_include_directories(mj_sdk
     PUBLIC

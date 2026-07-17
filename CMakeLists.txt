@@ -5,7 +5,16 @@ project(MJSDK
     LANGUAGES CXX
 )
 
+set(
+    CMAKE_EXPORT_COMPILE_COMMANDS
+    ON
+    CACHE BOOL
+    "Generate compile_commands.json for development tools"
+    FORCE
+)
+
 include(cmake/SdkConfiguration.cmake)
+include(cmake/CompilerWarnings.cmake)
 
 set(SDK_CONFIG "configuration/default.yaml" CACHE FILEPATH "SDK configuration yaml file")
 

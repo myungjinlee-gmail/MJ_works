@@ -1,0 +1,3 @@
+# Repository-relative directories, one per line.
+third_party
+.venv

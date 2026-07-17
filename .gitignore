@@ -6,3 +6,5 @@ third_party/google_test/**
 AGENTS.md
 .venv/
 third_party/plantuml/*.jar
+
+*__pycache__*

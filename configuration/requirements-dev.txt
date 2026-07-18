@@ -1,4 +1,3 @@
 # Keep every development-only Python tool pinned to an explicit version.
 cmakelang==0.6.13
 yamllint==1.35.1
-

@@ -14,8 +14,8 @@ permissions:
     contents: read
 
 jobs:
-    ci:
-        name: CI
+    release:
+        name: Release
         runs-on: ubuntu-24.04
 
         steps:
@@ -25,20 +25,51 @@ jobs:
                   fetch-depth: 0
                   ref: ${{ github.event.pull_request.head.sha }}
 
-            - name: Configure
-              run: cmake --preset default
+            - name: Configure Release
+              run: cmake --preset release -B build/release
 
-            - name: Build
-              run: cmake --build --preset default --parallel
+            - name: Build Release
+              run: cmake --build build/release --parallel
 
             - name: Static analysis (clang-tidy)
-              run: python3 scripts/clang_tidy.py --build-dir build
+              run: python3 scripts/clang_tidy.py --build-dir build/release
 
             - name: Unit test
-              run: ctest --test-dir build --output-on-failure
+              run: ctest --test-dir build/release --output-on-failure
 
             - name: Integration test
               run: echo "Integration test placeholder"
 
             - name: Requirement test
               run: echo "Requirement test placeholder"
+
+    coverage:
+        name: Coverage
+        runs-on: ubuntu-24.04
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.event.pull_request.head.sha }}
+
+            - name: Configure Coverage
+              run: cmake --preset coverage -B build/coverage
+
+            - name: Build Coverage
+              run: cmake --build build/coverage --parallel
+
+            - name: Clean coverage profiles
+              run: |
+                  mkdir -p build/coverage/profiles
+                  find build/coverage -type f -name '*.profraw' -delete
+
+            - name: Run coverage tests
+              env:
+                  LLVM_PROFILE_FILE: >-
+                      ${{ github.workspace }}/build/coverage/profiles/%p.profraw
+              run: ctest --test-dir build/coverage --output-on-failure
+
+            - name: Generate coverage report
+              run: bash scripts/generate_coverage_report.sh build/coverage

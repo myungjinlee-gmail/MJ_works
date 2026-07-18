@@ -2,20 +2,53 @@
   "version": 3,
   "configurePresets": [
     {
-      "name": "default",
-      "displayName": "Default SDK configuration",
-      "description": "Configure with configuration/default.yaml",
+      "name": "base",
+      "hidden": true,
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "SDK_CONFIG": "configuration/default.yaml"
+        "SDK_CONFIG": "configuration/default.yaml",
+        "SDK_GTEST": "ON"
       }
-    }
-  ],
-  "buildPresets": [
+    },
     {
-      "name": "default",
-      "configurePreset": "default"
+      "name": "debug",
+      "displayName": "Debug SDK configuration",
+      "description": "Configure a GCC Debug build without coverage instrumentation",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_C_FLAGS_DEBUG": "-g -O0",
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0",
+        "SDK_COVERAGE": "OFF"
+      }
+    },
+    {
+      "name": "coverage",
+      "displayName": "LLVM Coverage SDK configuration",
+      "description": "Configure a Clang Debug build with LLVM coverage instrumentation",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang-18",
+        "CMAKE_C_FLAGS_DEBUG": "-g -O0",
+        "CMAKE_CXX_COMPILER": "clang++-18",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0",
+        "SDK_COVERAGE": "ON"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release SDK configuration",
+      "description": "Configure a Release build without coverage instrumentation",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "SDK_COVERAGE": "OFF"
+      }
     }
   ]
 }

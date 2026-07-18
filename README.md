@@ -6,20 +6,23 @@
 
 Development setup is explicit and is not run by a normal CMake configure.
 
-Default configuration:
+Configure and build Debug or Release in a directory selected by the user:
 
 ```bash
-cmake --preset default
-cmake --build --preset default --parallel
+cmake --preset debug -B build/debug
+cmake --build build/debug --parallel
+
+cmake --preset release -B build/release
+cmake --build build/release --parallel
 ```
 
-The default preset loads `configuration/default.yaml`, which enables tests with
-`SDK_ENABLE_TESTS : ON`.
+Both presets load `configuration/default.yaml` and enable GoogleTest with
+`SDK_GTEST : ON`. Debug and Release use GCC without coverage instrumentation.
 
 Run the reference customer project executable:
 
 ```bash
-./build/customer_project/reference/mj_reference_app
+./build/debug/customer_project/reference/mj_reference_app
 ```
 
 Override selected values from the command line:
@@ -53,7 +56,8 @@ SDK_PROJECT_TARGET : reference
 SDK_CAPTURE_TARGET : raw
 SDK_DISPLAY_TARGET : raw
 SDK_RUN_DEV_SETUP : OFF
-SDK_ENABLE_TESTS : ON
+SDK_GTEST : ON
+SDK_COVERAGE : OFF
 ```
 
 Values passed with `-D` override values loaded from YAML. `vanila` is accepted as
@@ -71,7 +75,8 @@ All SDK build parameters are read from the selected YAML file:
 | `SDK_CAPTURE_TARGET` | Capture implementation |
 | `SDK_DISPLAY_TARGET` | Display implementation |
 | `SDK_RUN_DEV_SETUP` | Run the development bootstrap during configure |
-| `SDK_ENABLE_TESTS` | Configure and register tests |
+| `SDK_GTEST` | Configure and register GoogleTest-based tests |
+| `SDK_COVERAGE` | Enable LLVM coverage instrumentation for Debug builds |
 
 `SDK_CONFIG` is the only bootstrap parameter that cannot be supplied by the
 selected YAML file because it identifies which YAML file CMake must read. It
@@ -93,6 +98,8 @@ development host.
 | --- | --- | --- |
 | clang-format | 18.1.3 | Ubuntu package `clang-format-18` |
 | clang-tidy | 18.1.3 | Ubuntu package `clang-tidy-18` |
+| Clang C++ compiler | 18.1.3 | Ubuntu package `clang-18` |
+| llvm-cov and llvm-profdata | 18.1.3 | Ubuntu package `llvm-18` |
 | Python | 3.10 or newer | Host `python3` |
 | cmakelang | 0.6.13 | Project virtual environment |
 | yamllint | 1.35.1 | Project virtual environment |
@@ -140,10 +147,32 @@ Run the same clang-tidy analysis used by CI after configuring and building the
 test-enabled project:
 
 ```bash
-cmake --preset default
-cmake --build --preset default --parallel
-python3 scripts/clang_tidy.py --build-dir build
+cmake --preset release -B build/release
+cmake --build build/release --parallel
+python3 scripts/clang_tidy.py --build-dir build/release
 ```
+
+Build the Clang-based Coverage preset, run the tests with LLVM profiling
+enabled, and then generate a detailed source-based HTML coverage report:
+
+```bash
+cmake --preset coverage -B build/coverage
+cmake --build build/coverage --parallel
+
+mkdir -p build/coverage/profiles
+find build/coverage -type f -name '*.profraw' -delete
+
+LLVM_PROFILE_FILE="$(pwd)/build/coverage/profiles/%p.profraw" \
+    ctest --test-dir build/coverage --output-on-failure
+
+bash scripts/generate_coverage_report.sh build/coverage
+```
+
+The Coverage preset explicitly uses `-g` and `-O0`. CMake adds
+`-fprofile-instr-generate` and `-fcoverage-mapping` only when
+`SDK_COVERAGE=ON`. The report script only merges existing raw profiles with
+`llvm-profdata` and writes the `llvm-cov` HTML report to
+`build/coverage/coverage/index.html`.
 
 CMake always writes `compile_commands.json` to the selected build directory.
 Static-analysis directory exclusions are listed one repository-relative path

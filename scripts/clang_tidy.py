@@ -210,9 +210,9 @@ def run(arguments: Sequence[str]) -> int:
         if not required.is_file():
             raise AnalysisError(f"Required file does not exist: {required}")
 
-    if read_cache_value(cache_path, "SDK_ENABLE_TESTS") != "ON":
+    if read_cache_value(cache_path, "SDK_GTEST") != "ON":
         raise AnalysisError(
-            f"SDK_ENABLE_TESTS must be ON in the analysis build: {cache_path}"
+            f"SDK_GTEST must be ON in the analysis build: {cache_path}"
         )
 
     versions = read_dev_versions(versions_file)

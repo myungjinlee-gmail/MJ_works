@@ -25,7 +25,27 @@ cat >"${fake_bin}/clang-tidy-18" <<'EOF'
 echo "Ubuntu LLVM version 18.1.3"
 EOF
 
-chmod +x "${fake_bin}/clang-format-18" "${fake_bin}/clang-tidy-18"
+cat >"${fake_bin}/clang++-18" <<'EOF'
+#!/usr/bin/env bash
+echo "Ubuntu clang version 18.1.3"
+EOF
+
+cat >"${fake_bin}/llvm-cov-18" <<'EOF'
+#!/usr/bin/env bash
+echo "Ubuntu LLVM version 18.1.3"
+EOF
+
+cat >"${fake_bin}/llvm-profdata-18" <<'EOF'
+#!/usr/bin/env bash
+echo "Ubuntu LLVM version 18.1.3"
+EOF
+
+chmod +x \
+    "${fake_bin}/clang-format-18" \
+    "${fake_bin}/clang-tidy-18" \
+    "${fake_bin}/clang++-18" \
+    "${fake_bin}/llvm-cov-18" \
+    "${fake_bin}/llvm-profdata-18"
 ln -s "$(command -v python3)" "${fake_bin}/python3"
 
 cat >"${test_root}/os-release" <<'EOF'

@@ -26,11 +26,29 @@ sdk_define_boolean_option(
     OFF
 )
 sdk_define_boolean_option(
-    SDK_ENABLE_TESTS
-    "Build SDK tests"
+    SDK_GTEST
+    "Build GoogleTest-based SDK tests"
+    OFF
+)
+sdk_define_boolean_option(
+    SDK_COVERAGE
+    "Enable LLVM source-based coverage instrumentation"
     OFF
 )
 sdk_normalize_configuration()
+
+if(SDK_COVERAGE)
+    if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+        message(FATAL_ERROR "SDK_COVERAGE=ON is supported only for Debug builds")
+    endif()
+
+    if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        message(FATAL_ERROR "SDK_COVERAGE=ON requires the Clang compiler")
+    endif()
+
+    add_compile_options(-fprofile-instr-generate -fcoverage-mapping)
+    add_link_options(-fprofile-instr-generate)
+endif()
 
 if(SDK_RUN_DEV_SETUP)
     if(DEFINED ENV{CI} OR DEFINED ENV{GITHUB_ACTIONS})
@@ -57,7 +75,7 @@ endif()
 add_subdirectory(src)
 add_subdirectory(customer_project)
 
-if(SDK_ENABLE_TESTS)
+if(SDK_GTEST)
     enable_testing()
 
     set(INSTALL_GTEST OFF CACHE BOOL "Disable GoogleTest installation" FORCE)
@@ -76,5 +94,6 @@ message(STATUS "SDK_PROJECT_TARGET=${SDK_PROJECT_TARGET}")
 message(STATUS "SDK_CAPTURE_TARGET=${SDK_CAPTURE_TARGET} canonical=${SDK_CAPTURE_TARGET_CANONICAL}")
 message(STATUS "SDK_DISPLAY_TARGET=${SDK_DISPLAY_TARGET} canonical=${SDK_DISPLAY_TARGET_CANONICAL}")
 message(STATUS "SDK_RUN_DEV_SETUP=${SDK_RUN_DEV_SETUP}")
-message(STATUS "SDK_ENABLE_TESTS=${SDK_ENABLE_TESTS}")
+message(STATUS "SDK_GTEST=${SDK_GTEST}")
+message(STATUS "SDK_COVERAGE=${SDK_COVERAGE}")
 message(STATUS "SDK_CONFIG=${SDK_CONFIG_PATH}")

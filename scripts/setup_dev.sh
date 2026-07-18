@@ -163,6 +163,27 @@ else
     missing_packages+=("clang-tidy-${LLVM_VERSION%%.*}=${LLVM_PACKAGE_VERSION}")
 fi
 
+if clang_cxx_path="$(find_llvm_tool clang++)"; then
+    log "clang++ ${LLVM_VERSION} already satisfied: ${clang_cxx_path}"
+else
+    log "clang++ ${LLVM_VERSION} is missing"
+    missing_packages+=("clang-${LLVM_VERSION%%.*}=${LLVM_PACKAGE_VERSION}")
+fi
+
+llvm_coverage_tools_available=1
+for llvm_tool in llvm-cov llvm-profdata; do
+    if llvm_tool_path="$(find_llvm_tool "${llvm_tool}")"; then
+        log "${llvm_tool} ${LLVM_VERSION} already satisfied: ${llvm_tool_path}"
+    else
+        log "${llvm_tool} ${LLVM_VERSION} is missing"
+        llvm_coverage_tools_available=0
+    fi
+done
+
+if [[ ${llvm_coverage_tools_available} -eq 0 ]]; then
+    missing_packages+=("llvm-${LLVM_VERSION%%.*}=${LLVM_PACKAGE_VERSION}")
+fi
+
 if command -v python3 >/dev/null 2>&1 && python_version_is_supported python3; then
     log "Python ${PYTHON_MIN_VERSION}+ already satisfied: $(python3 --version 2>&1)"
 else
@@ -196,6 +217,9 @@ install_system_packages "${missing_packages[@]}"
 
 find_llvm_tool clang-format >/dev/null || fail "clang-format ${LLVM_VERSION} was not available after installation."
 find_llvm_tool clang-tidy >/dev/null || fail "clang-tidy ${LLVM_VERSION} was not available after installation."
+find_llvm_tool clang++ >/dev/null || fail "clang++ ${LLVM_VERSION} was not available after installation."
+find_llvm_tool llvm-cov >/dev/null || fail "llvm-cov ${LLVM_VERSION} was not available after installation."
+find_llvm_tool llvm-profdata >/dev/null || fail "llvm-profdata ${LLVM_VERSION} was not available after installation."
 
 if [[ ! -x "${venv_python}" ]]; then
     log "Creating Python environment: ${venv_path}"

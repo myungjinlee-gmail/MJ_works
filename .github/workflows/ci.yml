@@ -20,7 +20,7 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   fetch-depth: 0
                   ref: ${{ github.event.pull_request.head.sha }}
@@ -35,7 +35,36 @@ jobs:
               run: python3 scripts/clang_tidy.py --build-dir build/release
 
             - name: Unit test
-              run: ctest --test-dir build/release --output-on-failure
+              id: unit_test
+              run: |
+                  mkdir -p build/release/test-results
+                  ctest \
+                      --test-dir build/release \
+                      --output-on-failure \
+                      --output-junit \
+                      "$GITHUB_WORKSPACE/build/release/test-results/junit.xml"
+
+            - name: Upload unit test report
+              if: ${{ !cancelled() && steps.unit_test.outcome != 'skipped' }}
+              uses: actions/upload-artifact@v7
+              with:
+                  name: unit-test-results
+                  path: build/release/test-results/junit.xml
+                  if-no-files-found: error
+
+            - name: Upload Release binaries
+              uses: actions/upload-artifact@v7
+              with:
+                  name: release-binaries
+                  path: build/release/src/libmj_sdk.so
+                  if-no-files-found: error
+
+            - name: Upload Release build metadata
+              uses: actions/upload-artifact@v7
+              with:
+                  name: release-build-metadata
+                  path: build/release/compile_commands.json
+                  if-no-files-found: error
 
             - name: Integration test
               run: echo "Integration test placeholder"
@@ -49,7 +78,7 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   fetch-depth: 0
                   ref: ${{ github.event.pull_request.head.sha }}
@@ -73,3 +102,10 @@ jobs:
 
             - name: Generate coverage report
               run: bash scripts/generate_coverage_report.sh build/coverage
+
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v7
+              with:
+                  name: coverage-report
+                  path: build/coverage/coverage
+                  if-no-files-found: error

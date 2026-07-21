@@ -2,7 +2,6 @@
 
 <!-- Briefly describe the purpose of this PR. -->
 
-
 ## Related Issue
 
 close #
@@ -11,15 +10,18 @@ close #
 
 <!-- List the key changes only. -->
 
-- 
-- 
-- 
+-
 
+## Verification
 
-## Self Checklist: to be updated in the review checklist scope.
+<!-- List executed commands/checks and their results or links. -->
 
-- [ ] This PR is linked to the related issue.
-- [ ] The changes are within the scope of the issue.
-- [ ] The implementation has been self-reviewed.
-- [ ] No unrelated changes are included.
-- [ ] Build and test verification are covered by CI.
+-
+
+## Review Record
+
+<!--
+Do not complete the review checklist in this description.
+Immediately before merge, post a PR comment using:
+docs/template/review/review_comment_template.md
+-->

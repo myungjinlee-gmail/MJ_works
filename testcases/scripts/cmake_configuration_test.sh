@@ -28,6 +28,7 @@ cmake -S "${repo_root}" -B "${test_root}/yaml-build" \
 
 test -f "${test_root}/yaml-build/compile_commands.json"
 grep -Fq -- "-Werror" "${test_root}/yaml-build/compile_commands.json"
+grep -Fq -- "-std=c++17" "${test_root}/yaml-build/compile_commands.json"
 grep -Fq "SDK_RUN_DEV_SETUP:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_GTEST:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_COVERAGE:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"

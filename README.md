@@ -188,12 +188,8 @@ in [`docs/process/static_analysis.md`](docs/process/static_analysis.md).
   the project coding rules.
 - [`docs/process/git_workflow.md`](docs/process/git_workflow.md) defines branch,
   commit, Pull Request, and merge rules.
-- [`docs/process/review_rule.md`](docs/process/review_rule.md) defines the
-  self-review workflow and merge decisions.
-- [`docs/process/review_checklist.md`](docs/process/review_checklist.md) defines
-  the required review checks.
-- [`docs/template/review/review_comment_template.md`](docs/template/review/review_comment_template.md)
-  is the Pull Request review-comment format.
+- [`.github/pull_request_template.md`](.github/pull_request_template.md)
+  contains the reviewer workflow, required checks, and review-summary format.
 
 ### Optional PlantUML
 

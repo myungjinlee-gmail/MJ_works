@@ -4,8 +4,9 @@
 
 - All project C++ code shall compile as C++17 without compiler extensions.
 - `.clang-format` is the formatting source of truth.
-- `.clang-tidy` and `static_analysis.md` are the static-analysis sources of
-  truth. This document does not duplicate tool-enforced rules.
+- `.clang-tidy` and `static_analysis.md` define automated enforcement. This
+  document remains the policy source of truth, including rules that tools
+  enforce only partially or cannot enforce.
 
 ## Naming
 
@@ -33,7 +34,12 @@ throughout an interface.
 ## Ownership and lifetime
 
 - Resource ownership shall use RAII.
+- Every resource acquisition shall have a matching release. Acquisition and
+  release shall be owned by the same abstraction and placed at corresponding
+  lifecycle boundaries.
 - Owning raw pointers and direct owning `new` or `delete` are prohibited.
+- After the project allocator implementation is introduced, dynamic allocation
+  outside that implementation shall be prohibited.
 - Raw pointers and references are non-owning; nullable pointers and borrowed
   lifetimes shall be explicit at the interface.
 - A returned pointer, reference, view, or callback shall not outlive the object
@@ -43,20 +49,45 @@ throughout an interface.
 
 - Expected failures shall be represented explicitly by a return value or
   project status type and shall not be ignored.
-- Exceptions shall not be used for expected control flow or cross a public SDK,
-  hardware/OS abstraction, callback, or thread-entry boundary.
+- Every detected error shall be logged before it is handled, returned, or
+  propagated.
+- Exceptions are prohibited. Code shall not use `try`, `catch`, `throw`, or
+  exception-based control flow.
 - Error handling shall preserve enough context to identify the failed operation
   without exposing secrets or leaving partially updated state.
 
 ## Concurrency
 
-- The owner of mutable shared state and its synchronization mechanism shall be
-  identifiable from the design or implementation.
-- Access to shared mutable state shall be synchronized; lock ordering shall be
-  documented when more than one lock can be held.
+- Multithreading synchronization mechanisms shall be used only by the owning
+  framework or a dedicated control unit. General feature code shall not use
+  synchronization mechanisms.
+- Within an allowed framework or control unit, the owner of mutable shared state
+  and its synchronization mechanism shall be identifiable from the design or
+  implementation.
+- Within those units, access to shared mutable state shall be synchronized;
+  lock ordering shall be documented when more than one lock can be held.
 - Code shall not call an external callback while holding an internal lock.
 - Every started thread shall have an owner and a defined stop and join path;
   detached threads are prohibited.
+
+## Classes and variables
+
+- Classes shall not declare static data variables.
+- Namespace-scope global variables are prohibited. A variable that semantically
+  represents one unique resource across the entire system may be allowed only
+  through explicit review approval.
+
+## Control flow
+
+- Every function shall have a single entry and a single exit.
+- An explicit `return` shall appear only once, as the final statement of a
+  function. Early and intermediate returns are prohibited.
+- Unstructured jumps, including `goto`, are prohibited.
+
+## Preprocessor
+
+- Source macros are prohibited. Include guards are the only permitted source
+  macro use.
 
 ## Traceability and verification
 

@@ -6,11 +6,13 @@
 - Direct pushes to `main` are prohibited; all changes shall use a Pull Request.
 - Working branches shall be created from `main` and identify the related issue.
 
-Accepted branch naming forms:
+Recommended branch naming forms:
 
 - `<issue-id>-task-<short-description>`
 - `dev/<issue-id>-<short-description>`
 - `docs/<issue-id>-<short-description>`
+
+These forms are recommendations for consistency, not enforced requirements.
 
 ## Commit messages
 
@@ -27,14 +29,13 @@ Examples:
 
 - Each Pull Request shall link at least one GitHub Issue.
 - The description shall state the scope, changes, and verification evidence.
-- Review approval and the merge decision shall follow the
-  [review rule](review_rule.md); the checklist is recorded in a Pull Request
-  comment, not in the description.
+- Review approval and the merge decision shall follow the reviewer workflow,
+  checklist, and review-summary format in the default Pull Request description.
 
 ## Merge rule
 
 - The `Release` and `Coverage` checks shall pass.
-- A valid review comment for the current head shall conclude `MERGE` or
+- A valid review summary for the current head shall conclude `MERGE` or
   `MERGE WITH FOLLOW-UP`.
 - Each deferred finding shall link a follow-up issue before merge.
 - Prefer Squash Merge to keep `main` history clean.

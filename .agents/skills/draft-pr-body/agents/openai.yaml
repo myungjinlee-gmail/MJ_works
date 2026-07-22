@@ -1,0 +1,4 @@
+interface:
+    display_name: "Draft PR Title and Body"
+    short_description: "Draft concise PR titles and bodies from changes"
+    default_prompt: "Use $draft-pr-body to draft a concise English PR title and body for the current branch."

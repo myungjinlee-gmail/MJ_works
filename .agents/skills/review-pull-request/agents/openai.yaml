@@ -1,0 +1,12 @@
+interface:
+    display_name: "Review Pull Request"
+    short_description: "Review a PR using repository review rules"
+    default_prompt: "Use $review-pull-request to review the current pull request and draft line findings plus a review summary."
+
+dependencies:
+    tools:
+        - type: "mcp"
+          value: "github"
+          description: "Read pull requests and submit review threads and summaries"
+          transport: "streamable_http"
+          url: "https://api.githubcopilot.com/mcp/"

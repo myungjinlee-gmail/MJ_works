@@ -18,6 +18,7 @@ cmake --build build/release --parallel
 
 Both presets load `configuration/default.yaml` and enable GoogleTest with
 `SDK_GTEST : ON`. Debug and Release use GCC without coverage instrumentation.
+All project C++ targets compile as C++17 without compiler extensions.
 
 Run the reference customer project executable:
 
@@ -181,6 +182,15 @@ code remains included unless its directory is explicitly listed. The enabled
 checks, compiler-warning supplements, and known coverage limits are documented
 in [`docs/process/static_analysis.md`](docs/process/static_analysis.md).
 
+## Development Process
+
+- [`docs/process/coding_guideline.md`](docs/process/coding_guideline.md) defines
+  the project coding rules.
+- [`docs/process/git_workflow.md`](docs/process/git_workflow.md) defines branch,
+  commit, Pull Request, and merge rules.
+- [`.github/pull_request_template.md`](.github/pull_request_template.md)
+  contains the reviewer workflow, required checks, and review-summary format.
+
 ### Optional PlantUML
 
 PlantUML is documentation-only and is not installed by the bootstrap script.
@@ -190,8 +200,9 @@ generation commands are documented in
 
 ## Folder Tree
 
-- `docs/design`: design documents such as SWRS, SWAD, and coding guideline.
-- `docs/template`: skeleton, example, and rule documents for design docs, C++ code, and test code.
+- `docs/design`: requirements and architecture design documents.
+- `docs/process`: coding, Git, review, and analysis policies.
+- `docs/template`: reusable design, implementation, test, and review templates.
 - `.github`: GitHub issue and pull request configuration.
 - `cmake`: common CMake functions and helpers.
 - `configuration`: YAML-based CMake configuration files.

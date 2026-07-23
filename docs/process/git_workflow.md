@@ -1,27 +1,42 @@
-## Branch Strategy
+# Git Workflow
+
+## Branch strategy
 
 - `main` is the stable integration branch.
-- Direct push to `main` is not allowed.
-- All changes shall be merged through Pull Requests.
-- Working branches shall be created from `main`.
+- Direct pushes to `main` are prohibited; all changes shall use a Pull Request.
+- Working branches shall be created from `main` and identify the related issue.
 
-Branch naming:
+Recommended branch naming forms:
 
-- `dev/(issue-id)-<short-description>`
-- `docs/(issue-id)-<short-description>`
+- `<issue-id>-task-<short-description>`
+- `dev/<issue-id>-<short-description>`
+- `docs/<issue-id>-<short-description>`
 
-## Commit Message Rule
-(#<issue-no>) <summary> 
-(#12) add cmake hardware target selection 
-(#18) handle null display backend 
-(#21) update architecture overview 
-(#24) add config parser unit tests 
+These forms are recommendations for consistency, not enforced requirements.
 
-## Merge Rule
+## Commit messages
 
-- Use Pull Request only.
-- The `CI` status check must pass before a Pull Request can be merged into `main`.
-- A Pull Request shall not be merged while `CI` is pending or failing.
+Use `(#<issue-number>) <summary>`.
+
+Examples:
+
+- `(#12) add cmake hardware target selection`
+- `(#18) handle null display backend`
+- `(#21) update architecture overview`
+- `(#24) add config parser unit tests`
+
+## Pull Requests
+
+- Each Pull Request shall link at least one GitHub Issue.
+- The description shall state the scope, changes, and verification evidence.
+- Review approval and the merge decision shall follow the reviewer workflow,
+  checklist, and review-summary format in the default Pull Request description.
+
+## Merge rule
+
+- The `Release` and `Coverage` checks shall pass.
+- A valid review summary for the current head shall conclude `MERGE` or
+  `MERGE WITH FOLLOW-UP`.
+- Each deferred finding shall link a follow-up issue before merge.
 - Prefer Squash Merge to keep `main` history clean.
-- Delete branch after merge.
-- Each PR shall be linked to at least one GitHub Issue.
+- Delete the working branch after merge.

@@ -28,6 +28,7 @@ cmake -S "${repo_root}" -B "${test_root}/yaml-build" \
 
 test -f "${test_root}/yaml-build/compile_commands.json"
 grep -Fq -- "-Werror" "${test_root}/yaml-build/compile_commands.json"
+grep -Fq -- "-std=c++17" "${test_root}/yaml-build/compile_commands.json"
 grep -Fq "SDK_RUN_DEV_SETUP:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_GTEST:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_COVERAGE:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
@@ -48,6 +49,25 @@ cmake -S "${repo_root}" -B "${test_root}/yaml-build" \
 
 grep -Fq "SDK_GTEST:BOOL=ON" "${test_root}/yaml-build/CMakeCache.txt"
 grep -Fq "SDK_COVERAGE:BOOL=OFF" "${test_root}/yaml-build/CMakeCache.txt"
+python3 - "${test_root}/yaml-build/compile_commands.json" <<'PY'
+import json
+import pathlib
+import sys
+
+compile_commands_path = pathlib.Path(sys.argv[1])
+compile_commands = json.loads(compile_commands_path.read_text(encoding="utf-8"))
+missing_standard = [
+    entry["file"]
+    for entry in compile_commands
+    if "-std=c++17" not in entry.get("command", "")
+]
+
+if missing_standard:
+    print("C++17 without extensions is missing from:", file=sys.stderr)
+    for source_file in missing_standard:
+        print(f"  {source_file}", file=sys.stderr)
+    sys.exit(1)
+PY
 
 cmake -S "${repo_root}" -B "${test_root}/override-build" \
     -DSDK_CONFIG="${config_file}" \

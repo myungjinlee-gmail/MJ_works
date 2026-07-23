@@ -8,10 +8,3 @@ target_include_directories(mj_customer1_app PRIVATE
 )
 
 target_link_libraries(mj_customer1_app PRIVATE mj_sdk)
-target_compile_features(mj_customer1_app PRIVATE cxx_std_17)
-
-set_target_properties(mj_customer1_app PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
-)

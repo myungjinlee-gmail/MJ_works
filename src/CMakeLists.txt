@@ -11,9 +11,6 @@ target_include_directories(mj_sdk
 target_compile_features(mj_sdk PUBLIC cxx_std_17)
 
 set_target_properties(mj_sdk PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
     OUTPUT_NAME "mj_sdk"
 )
 

@@ -25,23 +25,46 @@ close #
 
 Start review only after all CI checks pass.
 
+This repository is maintained as a personal project. It does not require a
+separate reviewer or `CODEOWNERS` assignment. The repository owner is the sole
+review owner for every area and performs the self-review for self-authored Pull
+Requests.
+
 1. Add each change request to the relevant line as a review thread comment.
    Mark it `BLOCKING` or `NON-BLOCKING` and record its resolution or follow-up.
 2. Submit a review summary using the checklist below and select `DO NOT MERGE`
    while any required item fails or a blocking finding remains.
 3. After the author updates the PR, all CI checks pass, and review is requested
-   again, only the owners of the changed areas review the new changes and
-   submit new summaries. Repeat until every required item passes and every
-   required owner approves.
+   again, the repository owner reviews only the newly changed areas and submits
+   a new summary. Repeat until every required item passes and the owner records
+   a final decision.
 
-A new commit requires another review only from the owners of the areas changed
-by that commit; approvals for unaffected areas remain valid. Use `MERGE` when
-all required items pass with no blocking findings. Use `MERGE WITH FOLLOW-UP`
-only when acceptance criteria pass and each non-blocking finding links an
-issue. Otherwise, use `DO NOT MERGE`.
+A new commit requires another review only for the areas changed by that commit;
+review results for unaffected areas remain valid. Use `MERGE` when all required
+items pass with no blocking findings. Use `MERGE WITH FOLLOW-UP` only when
+acceptance criteria pass and each non-blocking finding links an issue.
+Otherwise, use `DO NOT MERGE`.
 
-Submit GitHub approval only with the final `MERGE` or
-`MERGE WITH FOLLOW-UP` summary for the current head.
+### Disputed findings
+
+If the author disagrees with a finding:
+
+1. Reply in the same review thread with the rationale and objective evidence.
+2. Evaluate the finding against the linked issue, project policies, and test or
+   analysis evidence. The reviewer records whether the request is retained,
+   withdrawn, or changed to `NON-BLOCKING` with a linked follow-up issue.
+3. Keep the thread unresolved and the decision as `DO NOT MERGE` until the
+   outcome is recorded and every blocking concern is resolved.
+4. If a finding remains disputed after evaluation, the repository owner makes
+   the final decision and documents why the evidence supports that decision in
+   the same thread.
+5. The reviewer resolves the thread only after the recorded outcome is applied
+   to the current change or the finding is withdrawn or deferred.
+
+GitHub does not permit the repository owner to approve a self-authored Pull
+Request. Submit a `COMMENT` review for the current head containing the completed
+checklist, objective evidence, and exactly one decision. This recorded decision
+is the required review record; GitHub approval is not required.
 
 Copy this block into the GitHub review summary. Record `PASS`, `FAIL`, or `N/A`
 for every item and explain every `N/A`.

@@ -32,12 +32,11 @@ as the source of truth; do not copy its checklist into this skill.
      review commit and inspect changes from that commit through the current
      head. A valid prior review contains the template checklist with every row
      completed and exactly one decision; ignore casual or partial comments.
-   - Use `CODEOWNERS`, repository ownership documentation, requested-reviewer
-     context, or explicit user context to identify owned areas. On re-review,
-     review only new changes in areas owned by the current reviewer; retain
-     approvals for unaffected areas.
-   - If ownership cannot be determined, inspect all new changes and state that
-     ownership could not be narrowed.
+   - Treat this repository as a personal project. Do not require a separate
+     reviewer or `CODEOWNERS`; the repository owner is the sole review owner for
+     every area and performs self-review for self-authored Pull Requests.
+   - On re-review, inspect only changes after the latest valid review commit.
+     Retain review results for unaffected areas.
 6. Trace requirements through implementation, tests, documentation, and build
    configuration. Prioritize correctness, safety, regressions, error paths,
    interface compatibility, ownership/lifetime, concurrency, and missing tests.
@@ -78,6 +77,27 @@ Include the follow-up issue link in a deferred finding.
 Do not modify the PR branch while acting as reviewer. Do not resolve an author's
 thread until the current diff demonstrates that the requested outcome is met.
 
+## Disputed findings
+
+Follow the governing template's disputed-finding flow when the repository owner
+disagrees with a finding during self-review:
+
+1. Require the owner to reply in the original thread with rationale and
+   objective evidence.
+2. Evaluate the finding against the linked issue, project policies, and test or
+   analysis evidence.
+3. Record one outcome in the thread: retain the request, withdraw it, or change
+   it to `NON-BLOCKING` with a linked follow-up issue.
+4. Keep the thread unresolved and the decision as `DO NOT MERGE` while a
+   blocking dispute remains.
+5. If the finding remains disputed, require the repository owner to make the
+   final decision and document why the evidence supports it in the same thread.
+6. Resolve the thread only after its recorded outcome is reflected in the
+   current change or the finding is withdrawn or validly deferred.
+
+Require the repository owner to document the self-review evidence and final
+decision for a self-authored Pull Request.
+
 ## GitHub submission
 
 Treat review submission as an external write. Inspect and draft the review when
@@ -93,11 +113,11 @@ For an authorized review with line findings:
    or changed lines and `LEFT` for deleted lines.
 3. Copy the review-summary block from `.github/pull_request_template.md`, fill
    every checklist result, select one decision, and replace every placeholder.
-4. Submit the pending review with:
-   - `REQUEST_CHANGES` for `DO NOT MERGE`;
-   - `APPROVE` for `MERGE` or `MERGE WITH FOLLOW-UP`;
-   - `COMMENT` only when GitHub prevents the required approval, such as an
-     author reviewing their own PR. Report that limitation explicitly.
+4. Submit the pending review as `COMMENT` for a self-authored Pull Request,
+   regardless of the selected decision. Do not attempt self-approval or
+   self-requested changes. State that the completed checklist and selected
+   decision are the required review record because GitHub prevents
+   self-approval and self-requested changes.
 5. Re-read the PR reviews and threads to verify that the submitted event,
    summary, and line comments are present on the intended head.
 

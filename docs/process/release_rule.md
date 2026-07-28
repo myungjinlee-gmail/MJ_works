@@ -1,6 +1,6 @@
 # Release Rule
 
-> Draft for issue #20. Release automation is outside this document's scope.
+Release automation is outside this document's scope.
 
 ## Purpose and scope
 
@@ -92,7 +92,6 @@ For a customer project:
 - Start each new major version at `MAJOR.0`.
 - Increment `MINOR` for corrections, additions, or re-deliveries within the
   same agreed delivery baseline.
-- Do not reuse a major number when an agreed delivery is cancelled.
 
 The release branch major and version major shall match. The project version
 recorded in the source and artifacts shall match the release version.
@@ -103,8 +102,7 @@ Tag every published release using:
 <project>-v<major>.<minor>
 ```
 
-Examples are `reference-v1.2`, `customer1-v2.0`, and `customer1-v2.1`. A
-pre-release may append an identifier such as `-rc.1`.
+Examples are `reference-v1.2`, `customer1-v2.0`, and `customer1-v2.1`.
 
 Release tags shall be annotated and identify the exact approved commit on the
 release branch. Do not move, reuse, or delete a published tag. A correction

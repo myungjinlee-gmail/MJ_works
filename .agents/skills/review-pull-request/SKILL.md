@@ -60,9 +60,16 @@ Write only actionable findings caused by the PR. Attach each change request to
 the narrowest relevant changed line. Use a file-level thread only when no single
 line represents the problem.
 
+Because the repository owner may act as both author and reviewer, prefix every
+reviewer-authored review-thread comment, including findings and disputed-finding
+outcomes, with `[Reviewer]` followed by one blank line. Do not add this marker
+to the review-summary body.
+
 Format each finding as:
 
 ```markdown
+[Reviewer]
+
 [BLOCKING] F-001: <concise problem>
 
 <why this is a problem and the concrete failure mode>

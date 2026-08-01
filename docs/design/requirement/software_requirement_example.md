@@ -37,7 +37,6 @@ target and makes the contents of the build artifact predictable.
 - Upstream:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
 - Downstream:
-    - [COMP-HW-001](../architecture/architecture_design_example.md#comp-hw-001)
-    - [ARC-CFG-001](../architecture/architecture_design_example.md#arc-cfg-001-hardware-implementation-selection)
+    - `TBD`
 - Verification:
     - [SWRVS-CFG-001](software_requirement_verification_example_rule.md)

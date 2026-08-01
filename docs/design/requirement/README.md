@@ -17,7 +17,7 @@ software requirements and their verification specifications.
 
 - [Software requirement verification spec rule](software_requirement_verification_spec_rule.md)
   is the authoritative policy for SWRVS ownership, acceptance criteria,
-  verification definition, and traceability.
+  verification measures, requirement satisfaction, and local traceability.
 - [Software requirement verification spec skeleton](software_requirement_verification_spec_skeleton.md)
   is copied to create one SWRVS file.
 - [Software requirement verification example](software_requirement_verification_example_rule.md)

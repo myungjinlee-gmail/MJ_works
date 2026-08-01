@@ -252,8 +252,9 @@ An accepted requirement shall contain at least one `[ID](location)` link in
 each of `Upstream`, `Downstream`, and `Verification`. Do not use `None` for
 these relationships.
 
-`TBD` may appear only on an unmerged working branch. Before acceptance, replace
-it with one or more `[ID](location)` links.
+`TBD` may appear only in a non-normative example or on an unmerged working
+branch. Before accepting a requirement, replace it with one or more
+`[ID](location)` links.
 
 ## Configuration requirements
 

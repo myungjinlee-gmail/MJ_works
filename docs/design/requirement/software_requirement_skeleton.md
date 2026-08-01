@@ -1,7 +1,11 @@
 # SWR-<DOMAIN>-<NNN>: <Requirement title>
 
 <!--
-Copy this file to SWR-<DOMAIN>-<NNN>-<kebab-case-title>.md.
+Create this directory:
+docs/design/requirement/<SWR-ID>/
+Copy this file to that directory as:
+SWR-<DOMAIN>-<NNN>-<kebab-case-title>.md
+Replace <SWR-ID> with this requirement's canonical SWR ID.
 This file represents exactly one requirement.
 Replace every placeholder and remove instructional comments.
 Read software_requirement_rule.md before authoring the requirement.

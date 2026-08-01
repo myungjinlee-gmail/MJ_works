@@ -21,6 +21,9 @@ implementation design, test source code, or executed verification results.
 
 ## File and identifier rules
 
+- Store each authored SWRVS in the
+  `docs/design/requirement/<SWR-ID>/` directory of the SWR linked by `Covers`.
+- Store only SWRVS artifacts that cover that directory's SWR in the directory.
 - Name an authored file `SWRVS-<DOMAIN>-<NNN>-<kebab-case-title>.md`.
 - Use `SWRVS-<DOMAIN>-<NNN>` as its canonical ID.
 - Make the title heading ID, `ID` section value, and filename ID agree.
@@ -33,8 +36,9 @@ implementation design, test source code, or executed verification results.
   renumber an accepted or removed local ID.
 - Preserve the skeleton heading order and exact field labels.
 
-The skeleton, rule, and example filenames are exceptions to the authored SWRVS
-filename rule.
+The README, rules, skeletons, examples, and review checklists in
+`docs/design/requirement/` are control documents and are exceptions to the
+authored SWRVS directory and filename rules.
 
 ## ID
 
@@ -212,22 +216,3 @@ The rule shall require:
 - Keep acceptance conditions separate from VM procedure and expected results.
 - Keep each VM's traceability inside that VM.
 - Use explicit values instead of "appropriate", "normal", or "as needed".
-
-## Review checklist
-
-- [ ] The title heading, `ID` section, and filename use one SWRVS ID.
-- [ ] `Covers` links exactly one SWR using `[ID](location)` and the SWR links
-      back to this SWRVS.
-- [ ] Applicability is inherited and not restated.
-- [ ] Every acceptance criterion has one stable local AC ID and matching
-      explicit anchor, is observable, and introduces no new obligation or
-      limit.
-- [ ] Every acceptance criterion is covered by at least one mandatory VM.
-- [ ] Every VM has one stable local VM ID, matching explicit anchor, and
-      explicit method, scope, environment, and preconditions.
-- [ ] Every VM has explicit inputs, reproducible steps, expected results, and an
-      unambiguous pass/fail rule.
-- [ ] Every VM locally links its covered ACs and verification implementation
-      using `[ID](location)`.
-- [ ] The requirement satisfaction rule covers execution, pass status,
-      acceptance-criterion coverage, and blocking anomalies.

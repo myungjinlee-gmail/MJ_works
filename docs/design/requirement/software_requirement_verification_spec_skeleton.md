@@ -1,7 +1,10 @@
 # SWRVS-<DOMAIN>-<NNN>: <Verification title>
 
 <!--
-Copy this file to SWRVS-<DOMAIN>-<NNN>-<kebab-case-title>.md.
+Copy this file into the directory named for the SWR linked by `Covers`:
+docs/design/requirement/<SWR-ID>/
+Name the copied file:
+SWRVS-<DOMAIN>-<NNN>-<kebab-case-title>.md
 This file defines the verification of exactly one software requirement.
 
 Replace every placeholder and remove instructional comments.

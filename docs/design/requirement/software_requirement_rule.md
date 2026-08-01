@@ -31,6 +31,9 @@ Verification Spec.
 ## File and identifier rules
 
 - Store exactly one normative requirement in each authored requirement file.
+- Create one `docs/design/requirement/<SWR-ID>/` directory for each authored
+  SWR, using the canonical SWR ID as the directory name.
+- Store exactly one SWR file in that directory.
 - Name the file `SWR-<DOMAIN>-<NNN>-<kebab-case-title>.md`.
 - Make the title heading ID, `Requirement metadata` > `ID` value, and filename
   ID agree.
@@ -42,6 +45,10 @@ Verification Spec.
   subsections instead of a summary table.
 - Preserve the skeleton heading order and section and subsection names. This
   makes files comparable and supports reliable automated extraction.
+
+The README, rules, skeletons, examples, and review checklists in
+`docs/design/requirement/` are control documents and are exceptions to the
+authored SWR directory and filename rules.
 
 ## Acceptance through the Pull Request workflow
 
@@ -281,19 +288,3 @@ or inclusion behavior explicitly when it is required.
 - Define project-specific abbreviations in the owning document.
 - Do not make a diagram or external issue the only place where an obligation is
   stated.
-
-## Review checklist
-
-- [ ] The file contains exactly one normative requirement.
-- [ ] The title heading, `Requirement metadata` > `ID` value, and filename use
-      one requirement ID.
-- [ ] The `Type` and `Applicability` subsections are unambiguous.
-- [ ] The statement uses one precise and verifiable `shall` obligation.
-- [ ] Rationale explains why without prescribing implementation.
-- [ ] Rationale links exactly one initial ticket using `[ID](location)`.
-- [ ] Upstream repeats the initial ticket and links any direct parent input.
-- [ ] Downstream links the closest design artifacts using `[ID](location)`.
-- [ ] Verification links at least one Software Requirement Verification Spec
-      using `[ID](location)`.
-- [ ] `Traceability` is the final section after `Rationale`.
-- [ ] The requirement contains no acceptance criteria or verification detail.

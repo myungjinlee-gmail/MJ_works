@@ -15,19 +15,23 @@ design, implementation, and verification.
 
 - Configurable C++ and CMake architecture with selectable platform backends.
 - Public SDK boundaries and reference customer-project integration.
-- Reproducible setup, CI, formatting, static analysis, testing, and coverage.
+- Reproducible setup, CI, formatting, static analysis, and automated test and
+  coverage infrastructure.
 - Traceability across requirements, architecture, implementation, and
   verification artifacts.
 
 ## Progress
 
 - **Completed:** C++/CMake project skeleton, development setup, CI, quality
-  checks, build presets, testing, coverage, and core process rules.
+  checks, build presets, test and coverage infrastructure, and core process
+  rules.
 - **In progress:** Reusable requirement, architecture, implementation, and
   verification templates.
-- **Next:** A small end-to-end reference path from configuration and backend
-  selection through the SDK API, customer application, and automated
-  verification.
+- **Next:** Turn the current project skeleton into a defined platform baseline
+  with software requirements, acceptance criteria, component architecture,
+  architecture decisions, and end-to-end traceability.
+- **Later:** Apply and validate the platform through a small video-processing
+  reference application.
 
 See the [project board](https://github.com/users/myungjinlee-gmail/projects/1/views/1)
 for current priorities and detailed progress.

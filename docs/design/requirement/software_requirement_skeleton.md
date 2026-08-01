@@ -7,15 +7,32 @@ Replace every placeholder and remove instructional comments.
 Read software_requirement_rule.md before authoring the requirement.
 -->
 
-| Field | Value |
-| --- | --- |
-| ID | `SWR-<DOMAIN>-<NNN>` |
-| Type | `<Functional / Quality / Interface / Constraint / Configuration>` |
-| Applicability | `<All, or a software configuration expression>` |
+## Requirement metadata
+
+### ID
+
+<!--
+Write this requirement's canonical ID.
+-->
+
+`SWR-<DOMAIN>-<NNN>`
+
+### Type
+
+`<Functional / Quality / Interface / Constraint / Configuration>`
+
+### Applicability
+
+`<All, or a software configuration expression>`
 
 ## Requirement
 
-<!-- State one necessary, unambiguous, and verifiable obligation. -->
+<!--
+State one necessary, unambiguous, and verifiable obligation.
+Include every condition, numeric value, unit, tolerance, and time limit that
+defines the software obligation in this requirement. An SWRVS shall not
+introduce a new obligation or limit.
+-->
 
 > The software shall <required behavior or quality>.
 

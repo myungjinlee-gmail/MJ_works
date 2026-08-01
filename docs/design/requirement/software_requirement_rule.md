@@ -32,13 +32,16 @@ Verification Spec.
 
 - Store exactly one normative requirement in each authored requirement file.
 - Name the file `SWR-<DOMAIN>-<NNN>-<kebab-case-title>.md`.
-- Make the heading ID, metadata ID, and filename ID agree.
+- Make the title heading ID, `Requirement metadata` > `ID` value, and filename
+  ID agree.
 - Use a short, stable uppercase domain. Do not encode a component name in the
   domain when the requirement applies to the software as a whole.
 - Allocate IDs monotonically within a domain.
 - Do not reuse or renumber an accepted or removed requirement ID.
-- Preserve the skeleton heading order and field names. This makes files
-  comparable and supports reliable automated extraction.
+- Use one `Requirement metadata` section with `ID`, `Type`, and `Applicability`
+  subsections instead of a summary table.
+- Preserve the skeleton heading order and section and subsection names. This
+  makes files comparable and supports reliable automated extraction.
 
 ## Acceptance through the Pull Request workflow
 
@@ -52,18 +55,26 @@ Git history records revisions and removals. If a requirement is replaced or
 removed, update all current trace links in the same Pull Request. Do not leave a
 current design or verification artifact pointing to an obsolete requirement.
 
-## Metadata fields
+## Requirement metadata
 
-### ID and title
+### ID
 
 The ID is the permanent reference to the requirement. The title is a short noun
 phrase that helps a reader find it; the title does not replace the normative
 statement.
 
+Write the canonical ID as the standalone value in the `ID` subsection.
+
 Good:
 
-```text
-SWR-CFG-001: Hardware target selection
+```markdown
+# SWR-CFG-001: Hardware target selection
+
+## Requirement metadata
+
+### ID
+
+`SWR-CFG-001`
 ```
 
 Avoid encoding status, implementation, priority, or a date in the ID.
@@ -83,6 +94,8 @@ Use the single type that best describes the obligation:
 Do not combine types in one field. Split requirements when they contain
 independent obligations.
 
+Write the selected type as the standalone value in the `Type` subsection.
+
 ### Applicability
 
 `Applicability` identifies the software or build configurations in which the
@@ -93,6 +106,9 @@ schedule, stakeholder scope, or verification environment.
 Use `All` when the requirement applies to every supported configuration.
 Otherwise, write an explicit expression using canonical configuration
 dimensions and values.
+
+Write `All` or the explicit expression as the standalone value in the
+`Applicability` subsection.
 
 Examples:
 
@@ -167,13 +183,17 @@ applicability, create a new requirement ID and record that change request as the
 new requirement's initial ticket.
 
 The same initial-ticket link also appears under `Upstream`. The Rationale owns
-the human explanation; Traceability owns the machine-readable relationship.
+the human explanation; the `Traceability` section owns the machine-readable
+relationship.
 
 ## Traceability
 
-Use a nested list, not a table:
+Place `Traceability` as the final section, after `Rationale`. Use a nested list,
+not a table:
 
 ```markdown
+## Traceability
+
 - Upstream:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
     - [SWR-SYS-001](SWR-SYS-001-system-configuration.md)
@@ -224,7 +244,7 @@ to this requirement.
 `Verification` links only Software Requirement Verification Specs. Do not link
 test code, commands, reports, or result evidence directly from the software
 requirement. The ownership and acceptance rules are defined in
-[the SWRVS example rule](software_requirement_verification_example_rule.md).
+[the SWRVS authoring rule](software_requirement_verification_spec_rule.md).
 
 ### Missing relationships
 
@@ -251,7 +271,7 @@ or inclusion behavior explicitly when it is required.
 
 ## Human and language-model readability
 
-- Keep the skeleton section order and exact field labels.
+- Keep the skeleton heading order and exact section and subsection names.
 - Use explicit IDs instead of pronouns such as "the above requirement".
 - Write one trace target per nested list item.
 - Use `[ID](location)` for every trace and initial-ticket link.
@@ -264,8 +284,9 @@ or inclusion behavior explicitly when it is required.
 ## Review checklist
 
 - [ ] The file contains exactly one normative requirement.
-- [ ] The heading, metadata, and filename use one unique requirement ID.
-- [ ] Type and applicability are unambiguous.
+- [ ] The title heading, `Requirement metadata` > `ID` value, and filename use
+      one requirement ID.
+- [ ] The `Type` and `Applicability` subsections are unambiguous.
 - [ ] The statement uses one precise and verifiable `shall` obligation.
 - [ ] Rationale explains why without prescribing implementation.
 - [ ] Rationale links exactly one initial ticket using `[ID](location)`.
@@ -273,4 +294,5 @@ or inclusion behavior explicitly when it is required.
 - [ ] Downstream links the closest design artifacts using `[ID](location)`.
 - [ ] Verification links at least one Software Requirement Verification Spec
       using `[ID](location)`.
+- [ ] `Traceability` is the final section after `Rationale`.
 - [ ] The requirement contains no acceptance criteria or verification detail.

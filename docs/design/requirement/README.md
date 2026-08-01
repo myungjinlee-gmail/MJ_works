@@ -21,8 +21,7 @@ software requirements and their verification specifications.
 - [Software requirement verification spec skeleton](software_requirement_verification_spec_skeleton.md)
   is copied to create one SWRVS file.
 - [Software requirement verification example](software_requirement_verification_example_rule.md)
-  demonstrates one non-normative SWRVS linked to the SWR example and defines
-  the SWR-to-SWRVS relationship rule referenced by the SWR rule.
+  demonstrates one non-normative SWRVS linked to the SWR example.
 
 ## Usage
 

@@ -6,11 +6,19 @@
 > requirement and does not serve as product authority. Its linked Software
 > Requirement Verification Spec is also a non-normative example.
 
-| Field | Value |
-| --- | --- |
-| ID | `SWR-CFG-001` |
-| Type | `Configuration` |
-| Applicability | `SDK_HW_TARGET in {vanilla, nvidia, arm}` |
+## Requirement metadata
+
+### ID
+
+`SWR-CFG-001`
+
+### Type
+
+`Configuration`
+
+### Applicability
+
+`SDK_HW_TARGET in {vanilla, nvidia, arm}`
 
 ## Requirement
 

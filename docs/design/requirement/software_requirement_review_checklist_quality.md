@@ -18,7 +18,7 @@
 - [ ] Every trace link targets a file in the release baseline or an immutable
       external target, and no link targets a broken or obsolete artifact.
 
-- [ ] No `TBD`, placeholder, or authoring instruction remains.
+- [ ] No `Pending`, `TBD`, placeholder, or authoring instruction remains.
 
 - [ ] The requirement's `Applicability` is consistent with the release
       configuration and determines whether the requirement applies to this

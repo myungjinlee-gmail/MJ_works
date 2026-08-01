@@ -59,8 +59,9 @@ Upstream includes the initial ticket and any direct parent requirement.
 Downstream identifies design artifacts that realize this requirement.
 Verification identifies Software Requirement Verification Specs, not tests or
 evidence.
-All three relationships require at least one link before the requirement is
-accepted through the Pull Request workflow.
+Downstream and Verification may be empty at acceptance. Complete all applicable
+relationships before treating the requirement as verifiable or adding it to a
+release baseline.
 -->
 
 - Upstream:

@@ -255,13 +255,24 @@ requirement. The ownership and acceptance rules are defined in
 
 ### Missing relationships
 
-An accepted requirement shall contain at least one `[ID](location)` link in
-each of `Upstream`, `Downstream`, and `Verification`. Do not use `None` for
-these relationships.
+Acceptance of a requirement approves the software obligation; it does not mean
+that development or verification is complete. At acceptance, `Upstream` shall
+link the initial ticket and every other authoritative input that already
+exists. `Downstream` and `Verification` may have no targets while their design
+and SWRVS artifacts do not yet exist.
 
-`TBD` may appear only in a non-normative example or on an unmerged working
-branch. Before accepting a requirement, replace it with one or more
-`[ID](location)` links.
+Keep the `Upstream`, `Downstream`, and `Verification` relationship labels even
+when a relationship has no target. Do not use `None`, `TBD`, a placeholder, or
+a link to a planned location in an accepted requirement. Add concrete
+`[ID](location)` links incrementally as the corresponding artifacts are added,
+and add the reverse link in the same Pull Request.
+
+A requirement becomes verifiable when the software implementation, downstream
+design, SWRVS, and verification implementations needed to evaluate its
+satisfaction exist. Before treating the requirement as verifiable, and before
+it enters a release baseline, each relationship shall contain at least one
+concrete target, every applicable direct relationship shall be recorded, and
+all required reverse links shall exist.
 
 ## Configuration requirements
 

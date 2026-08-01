@@ -13,7 +13,7 @@
 - [ ] Each VM's `Verification implementation` links an actual test case, test
       source, analysis script, or review checklist.
 
-- [ ] No `TBD`, placeholder, or authoring instruction remains.
+- [ ] No `Pending`, `TBD`, placeholder, or authoring instruction remains.
 
 - [ ] Every mandatory VM has been executed against the release baseline.
 

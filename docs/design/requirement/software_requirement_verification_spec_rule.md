@@ -181,18 +181,30 @@ Do not treat a skipped mandatory action or missing result as passing.
 
 ### Traceability
 
-Keep traceability local to each VM:
+Acceptance of an SWRVS approves its Acceptance Criteria and Verification
+Measures; it does not mean that their verification implementations are
+complete. Keep traceability local to each VM:
 
 - `Covers` links every acceptance criterion evaluated by the VM using its stable
-  local anchor.
+  local anchor. Because these criteria are owned by the same SWRVS, complete
+  these links before accepting the SWRVS.
 - `Verification implementation` links test cases, analysis scripts, review
-  checklists, or other verification implementations.
+  checklists, or other verification implementations that already exist. It may
+  have no targets while those implementation artifacts do not yet exist.
 
 Use `[ID](location)` and one target per nested list item. Do not duplicate VM
 trace links in a global SWRVS traceability section.
 
-`TBD` may appear only in a non-normative example or unmerged draft. Replace it
-with a concrete `[ID](location)` link before accepting the SWRVS.
+Keep the `Verification implementation` label when it has no target. Do not use
+`None`, `TBD`, a placeholder, or a link to a planned location in an accepted
+SWRVS. Add concrete implementation links incrementally as test cases, analysis
+scripts, review checklists, or other implementations are added.
+
+A VM is ready for verification when the implementations needed to reproduce
+its procedure or analysis exist. Before treating a VM as ready or performing
+its verification, link each of those implementations. Before evaluating an
+SWRVS against a release baseline, every VM shall link its actual verification
+implementation.
 
 ## Requirement Satisfaction Rule
 

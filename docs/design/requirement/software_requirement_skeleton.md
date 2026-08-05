@@ -59,14 +59,14 @@ Upstream includes the initial ticket and any direct parent requirement.
 Downstream identifies design artifacts that realize this requirement.
 Verification identifies Software Requirement Verification Specs, not tests or
 evidence.
-Downstream and Verification may be empty at acceptance. Complete all applicable
-relationships before treating the requirement as verifiable or adding it to a
-release baseline.
+Verification links every SWRVS accepted with this requirement. Downstream may be
+empty at acceptance; remove its nested placeholder item when no target exists.
+Complete all applicable relationships before treating the requirement as
+verification-ready or adding it to a release baseline.
 -->
 
 - Upstream:
     - [<ID>](<location>)
 - Downstream:
-    - [<ID>](<location>)
 - Verification:
-    - [<SWRVS-ID>](<location>)
+    - [SWRVS-<DOMAIN>-<NNN>](<location>)

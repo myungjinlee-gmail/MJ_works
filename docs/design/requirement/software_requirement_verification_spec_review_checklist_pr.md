@@ -9,6 +9,9 @@
 
 - [ ] `Covers` links exactly one SWR verified by this SWRVS.
 
+- [ ] The linked SWR provides the reverse `Verification` link in the same Pull
+      Request when either artifact is new or the relationship changes.
+
 ## Acceptance Criteria
 
 - [ ] Every Acceptance Criterion is derived only from the conditions and
@@ -48,6 +51,10 @@
       result is satisfied.
 
 - [ ] Each VM's `Covers` links exactly the ACs that the VM evaluates.
+
+- [ ] Each `Verification implementation` relationship links only an existing
+      implementation, or remains empty without `None`, `TBD`, a placeholder, or
+      a prospective link.
 
 ## Requirement satisfaction
 

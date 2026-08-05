@@ -38,7 +38,10 @@
 - [ ] When normal conditions alone are insufficient, the requirement defines
       the necessary boundary, maximum, minimum, or error conditions.
 
-## Verifiability
+## Statement verifiability
+
+This section evaluates whether the requirement statement can be verified in
+principle. It does not assert that development is verification-ready.
 
 - [ ] Requirement satisfaction can be determined objectively through an
       observable result.
@@ -56,3 +59,14 @@
 
 - [ ] The requirement file contains no Acceptance Criteria, verification
       procedure, expected test result, executed result, or evidence.
+
+## Requirement package traceability
+
+- [ ] A new SWR and every SWRVS needed to cover it are included in the same
+      Pull Request.
+
+- [ ] `Verification` links every included SWRVS, and each linked SWRVS links
+      back to this SWR through `Covers`.
+
+- [ ] An empty `Downstream` relationship contains no `None`, `TBD`, placeholder,
+      or prospective link.

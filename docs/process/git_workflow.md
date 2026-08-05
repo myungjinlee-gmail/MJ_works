@@ -57,6 +57,8 @@ Examples:
   changes.
 - Review approval and the merge decision shall follow the reviewer workflow,
   checklist, and review-summary format in the default Pull Request description.
+- Requirement changes shall follow the Pull Request sequence in
+  [Software Requirements and Verification](/docs/design/requirement/README.md#requirement-development-sequence).
 
 ## Merge rule
 

@@ -64,6 +64,10 @@ review, static analysis, or another defined verification method.
 
 Detailed test case formats and executed result formats are defined
 separately.
+
+When a verification implementation does not yet exist, keep the
+`Verification implementation` label without a nested target. Add concrete
+implementation links before treating the VM as ready for verification.
 -->
 
 <a id="vm-01"></a>
@@ -101,7 +105,6 @@ separately.
 - Covers:
     - [AC-01](#ac-01)
 - Verification implementation:
-    - [<TEST-CASE-OR-ANALYSIS-ID>](<location>)
 
 <a id="vm-02"></a>
 
@@ -137,7 +140,6 @@ separately.
     - [AC-01](#ac-01)
     - [AC-02](#ac-02)
 - Verification implementation:
-    - [<TEST-CASE-OR-ANALYSIS-ID>](<location>)
 
 ## Requirement Satisfaction Rule
 

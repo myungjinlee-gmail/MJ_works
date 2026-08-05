@@ -258,8 +258,9 @@ requirement. The ownership and acceptance rules are defined in
 Acceptance of a requirement approves the software obligation; it does not mean
 that development or verification is complete. At acceptance, `Upstream` shall
 link the initial ticket and every other authoritative input that already
-exists. `Downstream` and `Verification` may have no targets while their design
-and SWRVS artifacts do not yet exist.
+exists. `Verification` shall link the SWRVS artifacts accepted with the SWR,
+and each SWRVS shall link back to the SWR. `Downstream` may have no targets
+while its design artifacts do not yet exist.
 
 Keep the `Upstream`, `Downstream`, and `Verification` relationship labels even
 when a relationship has no target. Do not use `None`, `TBD`, a placeholder, or
@@ -267,12 +268,12 @@ a link to a planned location in an accepted requirement. Add concrete
 `[ID](location)` links incrementally as the corresponding artifacts are added,
 and add the reverse link in the same Pull Request.
 
-A requirement becomes verifiable when the software implementation, downstream
-design, SWRVS, and verification implementations needed to evaluate its
-satisfaction exist. Before treating the requirement as verifiable, and before
-it enters a release baseline, each relationship shall contain at least one
-concrete target, every applicable direct relationship shall be recorded, and
-all required reverse links shall exist.
+A requirement becomes verification-ready when the software implementation,
+downstream design, and verification implementations needed to evaluate its
+satisfaction exist. Before treating the requirement as verification-ready, and
+before it enters a release baseline, each relationship shall contain at least
+one concrete target, every applicable direct relationship shall be recorded,
+and all required reverse links shall exist.
 
 ## Configuration requirements
 

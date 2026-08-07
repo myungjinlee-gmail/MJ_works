@@ -87,7 +87,6 @@ implementation and excludes the vanilla and NVIDIA implementations.
     - [AC-02](#ac-02)
     - [AC-03](#ac-03)
 - Verification implementation:
-    - `TBD`
 
 ## Requirement Satisfaction Rule
 

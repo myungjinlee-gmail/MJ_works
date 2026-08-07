@@ -37,6 +37,5 @@ target and makes the contents of the build artifact predictable.
 - Upstream:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
 - Downstream:
-    - `TBD`
 - Verification:
     - [SWRVS-CFG-001](software_requirement_verification_example_rule.md)

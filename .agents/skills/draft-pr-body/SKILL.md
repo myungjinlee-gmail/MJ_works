@@ -7,7 +7,9 @@ description: Draft concise English GitHub pull request titles and bodies from th
 
 ## Workflow
 
-1. Read `docs/process/git_workflow.md` and `.github/pull_request_template.md`.
+1. Read `docs/process/git_workflow.md`,
+    `docs/design/requirement/README.md`, and
+    `.github/pull_request_template.md`.
     Preserve the template's section order, headings, fixed wording, and reviewer
     checklist items.
 2. Determine the intended base branch from the request or PR metadata. Otherwise,
@@ -16,13 +18,23 @@ description: Draft concise English GitHub pull request titles and bodies from th
     changed-file list, and relevant diff content. Check the worktree separately and
     do not treat uncommitted changes as part of the PR unless the user requests it.
 4. Identify the related issue from the request, branch name, commit messages, or PR
-    metadata. Never invent an issue number.
-5. Draft the PR title from the complete change and related issue, following the
+    metadata. Never invent an issue number. Determine whether this Pull Request
+    completes that issue or only references work that continues in later Pull
+    Requests.
+5. When the change concerns an SWR, SWRVS, downstream implementation, or
+    verification implementation, read the applicable authoring rules and verify
+    that the diff follows the requirement Pull Request sequence. Require a new
+    SWR and all SWRVS artifacts needed to cover it in one authoring Pull Request.
+    Require a semantic SWR change and every affected AC or VM change together.
+    Permit an SWRVS-only correction when the SWR does not change, and permit a
+    later stage's required trace-only update. Report authoring mixed with
+    downstream or verification implementation as a scope problem.
+6. Draft the PR title from the complete change and related issue, following the
     commit message rule in `docs/process/git_workflow.md`.
-6. Fill only the author-editable template sections. Remove their HTML guidance
+7. Fill only the author-editable template sections. Remove their HTML guidance
     comments and empty placeholders. Preserve the complete `Review` section
     verbatim unless the user explicitly asks to change the review policy.
-7. Recheck the title and every body statement against the diff and available
+8. Recheck the title and every body statement against the diff and available
     verification evidence.
 
 ## Writing Rules
@@ -39,6 +51,8 @@ description: Draft concise English GitHub pull request titles and bodies from th
   known. Leave the placeholder unresolved when it is not known.
 - Do not complete the reviewer checklist or select a review decision in the PR
   description. Preserve that reviewer-facing template content unchanged.
+- Preserve every checklist `<details>` element. Do not expand or duplicate its
+  checklist in an author-editable section.
 - Do not claim that tests or CI passed without evidence.
 - Keep the template structure. Do not add sections unless the user requests them.
 - Avoid implementation trivia, repetition, promotional language, and vague claims.

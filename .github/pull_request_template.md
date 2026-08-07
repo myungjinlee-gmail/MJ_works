@@ -66,11 +66,26 @@ Request. Submit a `COMMENT` review for the current head containing the completed
 checklist, objective evidence, and exactly one decision. This recorded decision
 is the required review record; GitHub approval is not required.
 
-Copy this block into the GitHub review summary. Record `PASS`, `FAIL`, or `N/A`
-for every item and explain every `N/A`.
+Copy this block into the GitHub review summary. Keep the decision and rationale
+visible. Put the common checklist and every applicable domain checklist inside
+the `details` element. Record `PASS`, `FAIL`, or `N/A` for every item, explain
+every `N/A`, and replace every placeholder.
 
 ```markdown
-### Checklist
+### Decision
+
+- [ ] MERGE
+- [ ] DO NOT MERGE
+- [ ] MERGE WITH FOLLOW-UP
+
+Rationale: <why the current change is or is not acceptable>
+
+Follow-up issues: <issue links, or None>
+
+<details>
+<summary>Checklist details — <PASS count> PASS, <FAIL count> FAIL, <N/A count> N/A</summary>
+
+### Common checklist
 
 | ID | Result | Review check and evidence or N/A reason |
 | --- | --- | --- |
@@ -84,15 +99,15 @@ for every item and explain every `N/A`.
 | DOC | PASS / FAIL / N/A | Applicable user, API, configuration, and process docs are updated. |
 | FINDINGS | PASS / FAIL / N/A | No blocking finding remains; deferred findings link follow-up issues. |
 
-### Decision
+### Applicable domain checklists
 
-- [ ] MERGE
-- [ ] DO NOT MERGE
-- [ ] MERGE WITH FOLLOW-UP
+#### <artifact ID or review area> — <checklist name>
 
-Rationale: <why the current change is or is not acceptable>
+| Review check | Result | Evidence or N/A reason |
+| --- | --- | --- |
+| <checklist item> | PASS / FAIL / N/A | <objective evidence or N/A reason> |
 
-Follow-up issues: <issue links, or None>
+</details>
 ```
 
 </details>

@@ -20,13 +20,32 @@ as the source of truth; do not copy its checklist into this skill.
 3. Read the linked issue and relevant coding, architecture, testing, and process
    documents. Inspect the complete PR diff, changed files, commits, existing
    reviews, and review threads.
-4. Fetch check runs for the current head and use them as the CI source of truth.
+4. Resolve the domain PR checklist set from the changed artifacts:
+   - For each changed artifact, find its owning domain README and read every
+     checklist that README explicitly identifies as a Pull Request review
+     checklist.
+   - Use the union of those checklists and evaluate a checklist once when
+     multiple artifacts select it. When a changed domain has no registered PR
+     checklist, apply only the common checklist to that domain and record that
+     no domain PR checklist is registered.
+   - For requirement artifacts, use
+     `docs/design/requirement/software_requirement_review_checklist_pr.md` for
+     every changed SWR and
+     `docs/design/requirement/software_requirement_verification_spec_review_checklist_pr.md`
+     for every changed SWRVS. Use both when both artifact types change.
+   - Never select a release-baseline or quality checklist during Pull Request
+     review. In particular, exclude every `*_review_checklist_quality.md` file
+     even when the Pull Request targets a release branch or establishes a
+     release baseline. Quality evaluation belongs to a separate workflow.
+   - Read the selected checklists in full and preserve their exact item text in
+     the review summary.
+5. Fetch check runs for the current head and use them as the CI source of truth.
    Start the review only when every check run is completed successfully. If any
    check is missing, pending, skipped, cancelled, or failed, stop and report the
    exact check state without posting a review. Do not treat an empty legacy
    combined-status result as pending when check runs contain the repository's
    CI results; report the API discrepancy instead.
-5. Determine the review scope:
+6. Determine the review scope:
    - For an initial review, inspect the complete base-to-head change.
    - For a re-review, find the authenticated reviewer's latest valid submitted
      review commit and inspect changes from that commit through the current
@@ -36,23 +55,59 @@ as the source of truth; do not copy its checklist into this skill.
      reviewer or `CODEOWNERS`; the repository owner is the sole review owner for
      every area and performs self-review for self-authored Pull Requests.
    - On re-review, inspect only changes after the latest valid review commit.
-     Retain review results for unaffected areas.
-6. Trace requirements through implementation, tests, documentation, and build
+     Retain review results for genuinely unaffected areas. Re-evaluate a retained
+     trace or verification result when newly changed design, code, test, analysis,
+     checklist, or configuration can invalidate it even if the linked SWR or
+     SWRVS file did not change.
+7. Classify the lifecycle gate before evaluating completeness:
+   - `Requirement authoring`: for a new SWR, apply both the SWR and SWRVS PR
+     checklists. Require all SWRVS artifacts needed to cover the SWR and complete
+     bidirectional SWR-to-SWRVS trace in the same Pull Request. For an SWRVS-only
+     correction, apply its checklist and confirm that the SWR obligation is
+     unchanged. Permit an empty `Downstream` relationship and empty
+     `Verification implementation` relationships while their targets do not
+     exist. Do not require later lifecycle work in this Pull Request.
+   - `Downstream implementation`: require the SWR, downstream design, and reverse
+     trace updates in the same Pull Request. Do not require verification
+     implementation unless the change claims verification readiness.
+   - `Verification implementation`: require concrete implementation IDs and
+     SWRVS links in the same Pull Request. Re-evaluate the affected VM and ACs.
+   - `Verification-ready claim`: require complete bidirectional traceability,
+     actual implementation links, and the PR evidence needed to support the
+     claim. Do not apply release-baseline quality checklists.
+8. Enforce the staged Pull Request boundary:
+   - Require a new SWR and all SWRVS artifacts needed to cover it in the same
+     requirement-authoring Pull Request.
+   - Require a semantic SWR change and every affected AC or VM correction in the
+     same authoring Pull Request. Permit an SWRVS-only correction when the SWR
+     obligation does not change.
+   - Permit verification implementation with trace-only updates to its accepted
+     SWRVS.
+   - Fail `SCOPE` when requirement authoring is combined with downstream design,
+     product code, verification implementation, or results. Require a semantic
+     authoring correction discovered during implementation to land first.
+9. Trace requirements through implementation, tests, documentation, and build
    configuration. Prioritize correctness, safety, regressions, error paths,
    interface compatibility, ownership/lifetime, concurrency, and missing tests.
-7. Reconcile existing threads before creating findings. Confirm whether each
+   Distinguish statement-level verifiability from lifecycle verification
+   readiness. Do not report a permitted future relationship as missing, and do
+   not require an unrelated Pull Request to repair pre-existing staged absence.
+10. Reconcile existing threads before creating findings. Confirm whether each
    prior request is resolved in the current scope and avoid duplicating an
    active thread.
-8. Complete every checklist row from the PR template as `PASS`, `FAIL`, or
-   justified `N/A`. Base each result on inspected evidence; do not infer that a
-   test or check passed.
-9. Select exactly one decision using the template criteria:
+11. Complete every common checklist row from the PR template and every row from
+    the resolved domain PR checklist set as `PASS`, `FAIL`, or justified `N/A`.
+    Base each result on inspected evidence; do not infer that a test or check
+    passed. Use the exact selected checklist text and group results by artifact.
+12. Select exactly one decision using the template criteria:
    - `DO NOT MERGE` when any required item fails, evidence is missing, a CI
      check is not successful, or a blocking finding remains.
    - `MERGE` when all required items pass or have justified `N/A` results and no
      blocking finding remains.
    - `MERGE WITH FOLLOW-UP` only when acceptance criteria pass, findings are
      non-blocking, and each deferred finding links an existing follow-up issue.
+   - Do not select `MERGE WITH FOLLOW-UP` merely because later lifecycle stages
+     remain; staged absence allowed by the governing rule is not a finding.
 
 ## Findings
 
@@ -120,6 +175,11 @@ For an authorized review with line findings:
    or changed lines and `LEFT` for deleted lines.
 3. Copy the review-summary block from `.github/pull_request_template.md`, fill
    every checklist result, select one decision, and replace every placeholder.
+   Keep the decision, rationale, and follow-up issues visible. Put the complete
+   common checklist and every checklist from the resolved domain PR checklist
+   set inside the template's single `<details>` element. Put PASS, FAIL, and N/A
+   totals in its summary and remove the domain placeholder section when no
+   domain PR checklist is registered.
 4. Submit the pending review as `COMMENT` for a self-authored Pull Request,
    regardless of the selected decision. Do not attempt self-approval or
    self-requested changes. State that the completed checklist and selected
@@ -133,7 +193,8 @@ so the same summary and verification sequence is used consistently.
 
 ## Output
 
-Lead with the decision. List blocking findings before non-blocking findings,
-include file and line references, summarize CI evidence, and state whether the
-review was drafted or submitted. If submitted, link the PR and identify the
-reviewed head SHA.
+Lead with the decision and lifecycle gate. List blocking findings before
+non-blocking findings, include file and line references, summarize CI evidence,
+and state whether the review was drafted or submitted. Keep detailed common and
+domain checklist tables inside `<details>`. If submitted, link the PR and
+identify the reviewed head SHA.

@@ -92,6 +92,7 @@ as the source of truth; do not copy its checklist into this skill.
    Distinguish statement-level verifiability from lifecycle verification
    readiness. Do not report a permitted future relationship as missing, and do
    not require an unrelated Pull Request to repair pre-existing staged absence.
+   Apply the Markdown link validation rules below to every changed Markdown link.
 10. Reconcile existing threads before creating findings. Confirm whether each
    prior request is resolved in the current scope and avoid duplicating an
    active thread.
@@ -108,6 +109,23 @@ as the source of truth; do not copy its checklist into this skill.
      non-blocking, and each deferred finding links an existing follow-up issue.
    - Do not select `MERGE WITH FOLLOW-UP` merely because later lifecycle stages
      remain; staged absence allowed by the governing rule is not a finding.
+
+## Markdown link validation
+
+- Determine the Markdown rendering context before resolving a link.
+- In a repository Markdown file, treat a link beginning with `/` as
+  repository-root-relative. Strip the leading slash and validate the resulting
+  path against the reviewed PR head.
+- Resolve `./` and `../` links relative to the directory containing the source
+   Markdown file.
+- Validate fragments against headings and explicit anchors in the target file.
+- Do not use a generic web URL resolver against a GitHub `blob` URL to determine
+  how GitHub renders repository Markdown links.
+- Report a broken-link finding only when the normalized repository target or
+  fragment does not exist at the reviewed head, or the rendered GitHub target
+  has been directly verified as invalid.
+- Apply separate resolution rules to Markdown in issues, Pull Requests, and
+  comments because their rendering context differs from repository files.
 
 ## Findings
 

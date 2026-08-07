@@ -168,25 +168,41 @@ the user explicitly requests posting, submission, approval, or change requests.
 
 For an authorized review with line findings:
 
-1. Create a pending review with `pull_request_review_write` method `create` and
-   the current head SHA. If the authenticated reviewer already has a pending
-   review, reuse it.
-2. Add every finding with `add_comment_to_pending_review`. Use `RIGHT` for added
-   or changed lines and `LEFT` for deleted lines.
-3. Copy the review-summary block from `.github/pull_request_template.md`, fill
+1. Copy the review-summary block from `.github/pull_request_template.md`, fill
    every checklist result, select one decision, and replace every placeholder.
    Keep the decision, rationale, and follow-up issues visible. Put the complete
    common checklist and every checklist from the resolved domain PR checklist
    set inside the template's single `<details>` element. Put PASS, FAIL, and N/A
    totals in its summary and remove the domain placeholder section when no
    domain PR checklist is registered.
-4. Submit the pending review as `COMMENT` for a self-authored Pull Request,
-   regardless of the selected decision. Do not attempt self-approval or
-   self-requested changes. State that the completed checklist and selected
-   decision are the required review record because GitHub prevents
+2. Store the complete review-summary body in one variable and do not rebuild it
+   during submission. Count every PASS, FAIL, and N/A row from that body,
+   validate its totals, and confirm that no placeholder remains before the
+   first external write.
+3. Create a pending review with `pull_request_review_write` method `create`,
+   the current head SHA, and the finalized body. If the authenticated reviewer
+   already has a pending review, reuse it only when its draft comments and head
+   belong to the current transaction; otherwise delete it and create one
+   pending review.
+4. Add every finding with `add_comment_to_pending_review`. Use `RIGHT` for added
+   or changed lines and `LEFT` for deleted lines.
+5. Submit the pending review as `COMMENT` for a self-authored Pull Request,
+   regardless of the selected decision, and pass the exact same finalized body
+   variable to `submit_pending`. Do not replace it with a short status message;
+   the submission body becomes the final review body. Do not attempt
+   self-approval or self-requested changes. State that the completed checklist
+   and selected decision are the required review record because GitHub prevents
    self-approval and self-requested changes.
-5. Re-read the PR reviews and threads to verify that the submitted event,
-   summary, and line comments are present on the intended head.
+6. Re-read the PR reviews and threads to verify that exactly one new submitted
+   review has the finalized body, `COMMENTED` state, intended head SHA, and all
+   intended line comments. Compare the complete body, not only the decision.
+7. If the pending review needs correction before submission, update the local
+   finalized body and pass it to `submit_pending`. If a draft line comment or
+   reviewed head is wrong, delete the pending review and recreate the transaction.
+8. If submission fails or post-submit verification finds a mismatch, stop
+   without creating another submitted review. If the review is already
+   immutable, report the mismatch and request explicit authorization before a
+   corrective review.
 
 For an authorized review without findings, a pending review is still preferred
 so the same summary and verification sequence is used consistently.

@@ -37,5 +37,9 @@ target and makes the contents of the build artifact predictable.
 - Upstream:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
 - Downstream:
+    - [swad-component-02](../architecture/architecture_design_example.md#swad-component-02)
+    - [swad-component-03](../architecture/architecture_design_example.md#swad-component-03)
+    - [swad-component-04](../architecture/architecture_design_example.md#swad-component-04)
+    - [swad-component-05](../architecture/architecture_design_example.md#swad-component-05)
 - Verification:
     - [SWRVS-CFG-001](software_requirement_verification_example_rule.md)

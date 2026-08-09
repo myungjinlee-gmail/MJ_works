@@ -31,9 +31,9 @@ prevents the SDK core from depending directly on a hardware variant.
 
 ### Component Diagram
 
-[PlantUML source](diagrams/hardware-target-components.puml)
-
-![Hardware target component diagram](diagrams/hardware-target-components.svg)
+Not applicable: this non-normative example omits diagram source and rendered
+assets. [Issue #43](https://github.com/myungjinlee-gmail/MJ_works/issues/43)
+owns the reusable PlantUML component-diagram template and rendering workflow.
 
 ### Dynamic Behavior
 

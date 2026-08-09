@@ -154,3 +154,7 @@ alter a decision that meets the ADR criteria.
 - [ ] The architecture document states the current design and links the
       governing ADR without duplicating the ADR's decision history,
       alternatives, or detailed rationale.
+
+- [ ] Every governing ADR link in the architecture document resolves to the
+      current applicable ADR, and the documented architecture does not
+      contradict that ADR's `Decision` or its stated boundaries.

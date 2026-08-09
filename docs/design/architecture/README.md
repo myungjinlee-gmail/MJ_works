@@ -26,10 +26,12 @@ Pull Request review selects only the PR checklist. Release-baseline evaluation
 selects the quality checklist, which first requires every applicable PR
 checklist item to be satisfied.
 
-The software has one current architecture document. Do not allocate a separate
-architecture document ID or create one architecture document per component.
-Components are described as subsections of the single architecture document
-and receive stable `swad-component-NN` IDs for traceability.
+The software's single current architecture document shall be authored and
+maintained at `docs/design/architecture/software_architecture_design.md`. Do
+not allocate a separate architecture document ID or create one architecture
+document per component. Components are described as subsections of the single
+architecture document and receive stable `swad-component-NN` IDs for
+traceability.
 
 ## Related design artifacts
 
@@ -76,8 +78,9 @@ or change a requirement when the software obligation must change.
 ## Usage
 
 1. Read the architecture design rule and the accepted SWRs and SWRVSs.
-2. Copy the skeleton to the software's single architecture document. Do not
-   assign an architecture document ID.
+2. Copy the skeleton to
+   `docs/design/architecture/software_architecture_design.md`. Do not assign an
+   architecture document ID.
 3. Define Scope, Design Purpose, Context, and every required Design subsection.
 4. Maintain the component diagram as PlantUML source and a rendered SVG. Keep
    component-level sequence diagrams in Mermaid.

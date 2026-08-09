@@ -33,6 +33,10 @@ as the source of truth; do not copy its checklist into this skill.
      every changed SWR and
      `docs/design/requirement/software_requirement_verification_spec_review_checklist_pr.md`
      for every changed SWRVS. Use both when both artifact types change.
+   - For architecture artifacts, use
+     `docs/design/architecture/architecture_design_review_checklist_pr.md` for
+     every changed software architecture document and every changed ADR. Apply
+     the checklist once when both artifact types change.
    - Never select a release-baseline or quality checklist during Pull Request
      review. In particular, exclude every `*_review_checklist_quality.md` file
      even when the Pull Request targets a release branch or establishes a

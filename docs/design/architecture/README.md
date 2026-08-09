@@ -13,6 +13,19 @@ Records (ADRs) used to maintain one software architecture for the software.
 - [Architecture design example](architecture_design_example.md) demonstrates
   the structure with a non-normative hardware-target design.
 
+## Review checklists
+
+- [Architecture design PR review checklist](architecture_design_review_checklist_pr.md)
+  evaluates the architecture document and every applicable ADR during Pull
+  Request review.
+- [Architecture design release baseline quality checklist](architecture_design_review_checklist_quality.md)
+  evaluates the architecture document and applicable ADRs against the exact
+  release candidate after its baseline is established.
+
+Pull Request review selects only the PR checklist. Release-baseline evaluation
+selects the quality checklist, which first requires every applicable PR
+checklist item to be satisfied.
+
 The software has one current architecture document. Do not allocate a separate
 architecture document ID or create one architecture document per component.
 Components are described as subsections of the single architecture document
@@ -45,6 +58,11 @@ The [`adr/`](adr/) directory defines the ADR workflow and template.
   to reverse.
 - Add an SWCD or configuration specification later and link it from the owning
   component's `Downstream` or `Configuration` list in the same Pull Request.
+- Define component and unit design after the architecture is accepted. Define
+  software component and integration verification specifications and
+  implementations in their later lifecycle stage after the component and unit
+  boundaries needed by verification are available. Architecture authoring does
+  not require those future artifacts.
 - Keep only conceptual descriptions of data flow, threads, and pipelines in the
   architecture document. Move their detailed design to the dedicated component
   when that component is introduced.

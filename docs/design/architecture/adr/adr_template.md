@@ -7,10 +7,10 @@ Replace every placeholder and remove instructional comments.
 
 | Field | Value |
 | --- | --- |
-| Status | `Accepted` |
 | Date | `YYYY-MM-DD` |
-| Related requirements or designs | `<IDs or links, or None>` |
-| Supersedes | `<ADR links, or None>` |
+| Related requirements or designs | [<ID>](<location>), or `None` |
+| Supersedes | [<ADR-NNNN>](<location>), or `None` |
+| Superseded by | [<ADR-NNNN>](<location>), or `None` |
 
 ## Context
 
@@ -36,9 +36,3 @@ Replace every placeholder and remove instructional comments.
 - **Benefits:** <expected benefits>
 - **Costs:** <accepted costs or limitations>
 - **Risks:** <remaining risks and mitigation, or None>
-
-## Verification
-
-<!-- Link evidence or follow-up work that demonstrates the decision is applied. -->
-
-- <Test, analysis, design, or follow-up issue link>

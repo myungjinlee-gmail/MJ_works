@@ -25,21 +25,16 @@ ADR-NNNN-kebab-case-title.md
 
 Use the next unused four-digit number. Do not renumber an existing ADR.
 
-## Simple status model
+## Acceptance and lifecycle
 
-This is a personal project, so ADRs do not use a separate approval workflow or
-a detailed status-transition process. The Pull Request is the proposal and
-self-review stage.
-
-Only two stored status forms are needed:
-
-- `Accepted`: the decision is current.
-- `Superseded by ADR-NNNN`: the named ADR replaces the decision.
+Do not store an approval status in an ADR. The Pull Request is the proposal and
+self-review stage. An ADR merged through the required Pull Request workflow is
+accepted and current unless its `Superseded by` field links a replacement ADR.
 
 A rejected proposal is not merged as an ADR. Its relevant alternatives and
 trade-offs are summarized in the accepted ADR instead. When a decision changes,
-create a new ADR and update the old ADR status with a link to the replacement.
-Merge both changes in the same Pull Request.
+create a new ADR and add reciprocal supersession links between the old and new
+ADRs. Merge both changes in the same Pull Request.
 
 ## When to supersede an ADR
 
@@ -58,15 +53,16 @@ Do not supersede an ADR for wording, link, or formatting corrections, additional
 evidence, or implementation details that remain within the accepted decision.
 
 The new ADR shall set `Supersedes` to the old ADR. The old ADR shall set
-`Status` to `Superseded by ADR-NNNN`. These reciprocal links preserve the
-decision history without a separate lifecycle process.
+`Superseded by` to the new ADR. Each field uses a canonical `[ADR-NNNN](location)`
+link. These reciprocal links preserve the decision history without a stored
+status or a separate lifecycle process.
 
 ## Workflow
 
 1. Open or identify the issue that requires the decision.
 2. Copy the template and record the context, alternatives, decision, and
    consequences.
-3. Set the status to `Accepted` and open a Pull Request.
+3. Open a Pull Request containing the ADR and its related architecture change.
 4. Perform the normal self-review defined by the Pull Request template.
 5. Merge the ADR before or with the implementation that depends on it.
 

@@ -205,7 +205,7 @@ not a table:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
     - [SWR-SYS-001](SWR-SYS-001-system-configuration.md)
 - Downstream:
-    - [COMP-HW-001](../architecture/architecture.md#comp-hw-001)
+    - [swad-component-02](../architecture/architecture_design_example.md#swad-component-02)
 - Verification:
     - [SWRVS-CFG-001](software_requirement_verification_example_rule.md)
 ```

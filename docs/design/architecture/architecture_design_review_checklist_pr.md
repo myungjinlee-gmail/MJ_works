@@ -128,8 +128,10 @@ alter a decision that meets the ADR criteria.
       or dependency, or would be costly to reverse adds or supersedes an ADR in
       the same Pull Request.
 
-- [ ] The ADR filename, title ID, and every ADR reference use the same next
-      unused `ADR-NNNN` identifier, and the ADR records exactly one decision.
+- [ ] A new ADR's filename, title ID, and every ADR reference use the same next
+      unused `ADR-NNNN` identifier. An existing ADR's filename, title ID, and
+      every ADR reference preserve and consistently use its allocated
+      identifier. Every ADR records exactly one decision.
 
 - [ ] The ADR has a valid decision date, does not store an approval status, and
       uses `Supersedes` and `Superseded by` only for decision-history links.

@@ -36,8 +36,9 @@ traceability.
 ## Related design artifacts
 
 - An SWR defines a software obligation allocated to an architecture component.
-- An SWCD defines the units, classes, functions, files, and other detailed
-  design that realize one architecture component.
+  Every accepted architecture component is allocated at least one accepted SWR.
+- [Component design](/docs/design/component/README.md) defines the implementation-neutral
+  constituent-unit decomposition that realizes one architecture component.
 - A configuration specification defines configuration values and their effect
   on a component.
 - An external interface specification owns detailed operations, data formats,
@@ -46,7 +47,8 @@ traceability.
   architecture document describes the current result and links an ADR from the
   relevant explanation when its rationale is needed.
 
-The [`adr/`](adr/) directory defines the ADR workflow and template.
+The [`adr/`](/docs/design/architecture/adr/) directory defines the ADR workflow
+and template.
 
 ## Architecture development sequence
 
@@ -60,6 +62,8 @@ The [`adr/`](adr/) directory defines the ADR workflow and template.
   to reverse.
 - Add an SWCD or configuration specification later and link it from the owning
   component's `Downstream` or `Configuration` list in the same Pull Request.
+- Before approving a release baseline, ensure every architecture component in
+  the selected project and configuration links exactly one current SWCD.
 - Define component and unit design after the architecture is accepted. Define
   software component and integration verification specifications and
   implementations in their later lifecycle stage after the component and unit
@@ -89,7 +93,8 @@ or change a requirement when the software obligation must change.
 6. Describe every component's responsibilities, abstract inputs and outputs,
    architecture-significant relationships, and local traceability.
 7. Link detailed SWCD, configuration, and external-interface artifacts only
-   when they exist.
+   when they exist. Before release, ensure every included component has its
+   required current SWCD.
 8. Use the example only as a formatting reference.
 
 This README owns the architecture development sequence. The linked rule owns

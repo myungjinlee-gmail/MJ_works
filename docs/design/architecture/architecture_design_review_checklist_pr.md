@@ -94,9 +94,10 @@ that artifact has been defined and performed.
 
 ## Traceability and consistency
 
-- [ ] Every affected accepted SWR is linked from each component to which it is
-      wholly or partly allocated, and the SWR provides the reverse component
-      link in the same Pull Request.
+- [ ] Every component links at least one accepted SWR; every affected accepted
+      SWR is linked from each component to which it is wholly or partly
+      allocated, and the SWR provides the reverse component link in the same
+      Pull Request.
 
 - [ ] When an applicable SWCD or configuration specification already exists,
       the component links it through `Downstream` or `Configuration`, and the
@@ -108,9 +109,10 @@ that artifact has been defined and performed.
       without `None`, `TBD`, a placeholder, or a prospective link. The absence
       of a future artifact is not a defect.
 
-- [ ] Every concrete relationship uses one canonical `[ID](location)` target,
-      resolves to an existing file and stable anchor, and is consistent in both
-      directions.
+- [ ] Every concrete relationship resolves to an existing target and is
+      consistent in both directions. A target with a stable ID uses canonical
+      `[ID](location)` form; an SWCD relationship links its file directly and
+      does not require a title or separate design ID as its label.
 
 - [ ] Scope, context, component diagram, component descriptions, dynamic
       behavior, interfaces, execution architecture, configuration links, and

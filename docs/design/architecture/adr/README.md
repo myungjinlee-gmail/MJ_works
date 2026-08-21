@@ -53,9 +53,10 @@ Do not supersede an ADR for wording, link, or formatting corrections, additional
 evidence, or implementation details that remain within the accepted decision.
 
 The new ADR shall set `Supersedes` to the old ADR. The old ADR shall set
-`Superseded by` to the new ADR. Each field uses a canonical `[ADR-NNNN](location)`
-link. These reciprocal links preserve the decision history without a stored
-status or a separate lifecycle process.
+`Superseded by` to the new ADR. Each field uses a canonical
+`[ADR-NNNN](ADR-NNNN-title.md)` link. ADRs share this directory, so these links
+may use relative filenames. These reciprocal links preserve the decision
+history without a stored status or a separate lifecycle process.
 
 ## Workflow
 

@@ -4,9 +4,8 @@
 Copy this file to the architecture design document for the software.
 Replace every placeholder and remove instructional comments.
 
-Describe software architecture at the component level. Keep source-level units,
-classes, functions, and files in the downstream Software Component Design
-(SWCD), not in this document.
+Describe software architecture at the component level. Keep content below a
+component boundary in its owning downstream design artifacts.
 -->
 
 ## Scope
@@ -38,7 +37,7 @@ details in each component's `Relationships` list; do not repeat them below the
 diagram.
 -->
 
-[PlantUML source](<component-diagram.puml-location>)
+[PlantUML source](<component-diagram.pu-location>)
 
 ![Component diagram](<component-diagram.svg-location>)
 
@@ -64,12 +63,11 @@ sequenceDiagram
 
 <!--
 Keep this subsection. Describe only the conceptual data movement between
-architecture components. Detailed data-flow diagrams, transformations, queues,
-and implementation will move to a dedicated component when that component is
-introduced.
+architecture components. Keep lower-level data flow and implementation in
+their owning downstream design or implementation artifacts.
 -->
 
-<Conceptual data flow and planned transfer to the dedicated component>
+<Conceptual data flow and applicable downstream design boundary>
 
 #### Control Flow
 
@@ -121,8 +119,16 @@ globally available component when all of these are true:
 Logging, diagnostics, and generic utility components commonly meet this
 exclusion rule. Include them when any criterion is not satisfied.
 
-Do not identify implementation units, classes, functions, or source files.
-Link the downstream SWCD that owns those details.
+Do not identify constituent units or their detailed design. Content below the
+component boundary belongs to its owning downstream design artifacts.
+
+Every accepted component links at least one accepted SWR under `Upstream`, and
+each SWR provides the reverse component link.
+
+An SWCD has no separate design ID. Link its file directly from `Downstream`.
+The link label is descriptive and need not match the SWCD title. The SWCD links
+back to this component with the stable `swad-component-nn` ID. Add or update
+both links in the same Pull Request.
 -->
 
 <a id="swad-component-nn"></a>
@@ -143,27 +149,28 @@ Link the downstream SWCD that owns those details.
         - [swad-component-nn](#swad-component-nn)
 - Traceability:
     - Upstream:
-        - [<SWR-ID>](<location>)
+        - [<SWR-ID>](/docs/design/requirement/SWR-DOMAIN-NNN/SWR-DOMAIN-NNN-title.md)
     - Downstream:
-        - [<SWCD-ID>](<location>)
+        - [SWCD](/src/component-name/component-name.md)
     - Configuration:
-        - [<CONFIGURATION-SPEC-ID>](<location>)
+        - [<CONFIGURATION-SPEC-ID>](/PATH/TO/CONFIGURATION-SPEC.md)
 
 ### Interfaces
 
 <!--
 Keep this section. Briefly describe each external interface's conceptual
-purpose and architecture boundary. Detailed operations, data definitions,
-protocols, error behavior, timing, compatibility, and implementation will move
-to the owning external interface specification.
+purpose and architecture boundary. Keep detailed operations, data definitions,
+protocols, error behavior, timing, compatibility, and implementation in their
+owning downstream design or external interface specification. When no external
+interface exists, write `Not applicable: <reason>`.
 -->
 
-<Conceptual external-interface summary>
+<Conceptual external-interface summary, or Not applicable: reason>
 
 <How and when the details transfer to the external interface specifications>
 
 - External interface specifications:
-    - [<INTERFACE-SPEC-ID>](<location>)
+    - [<INTERFACE-SPEC-ID>](/PATH/TO/INTERFACE-SPEC.md)
 
 ### Execution Architecture
 
@@ -171,23 +178,23 @@ to the owning external interface specification.
 
 <!--
 Keep this subsection. Describe only the conceptual execution contexts,
-concurrency needs, and their relationship to architecture components. Detailed
-thread ownership, scheduling, synchronization, lifecycle, and implementation
-will move to a dedicated component when that component is introduced.
+concurrency needs, and their relationship to architecture components. Keep
+detailed thread ownership, scheduling, synchronization, lifecycle, and
+implementation in their owning downstream design or implementation artifacts.
 -->
 
-<Conceptual thread model and planned transfer to the dedicated component>
+<Conceptual thread model and applicable downstream design boundary>
 
 #### Pipelines
 
 <!--
 Keep this subsection. Describe only the conceptual processing stages, ordering,
-and concurrency between stages. Detailed pipeline ownership, buffering,
-backpressure, scheduling, and implementation will move to a dedicated component
-when that component is introduced.
+and concurrency between stages. Keep detailed collaboration, pipeline
+ownership, buffering, backpressure, scheduling, and implementation in their
+owning downstream design or implementation artifacts.
 -->
 
-<Conceptual pipeline model and planned transfer to the dedicated component>
+<Conceptual pipeline model and applicable downstream design boundary>
 
 #### Timing Constraints
 

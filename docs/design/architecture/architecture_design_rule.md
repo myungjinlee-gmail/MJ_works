@@ -22,7 +22,7 @@ The architecture document owns:
 The architecture document does not own:
 
 - software requirements or acceptance criteria;
-- detailed units, classes, functions, algorithms, or source files;
+- abstract constituent-unit decomposition or detailed unit design;
 - detailed data-flow, thread, or pipeline design;
 - detailed external-interface specifications;
 - the history and rationale of significant decisions;
@@ -30,10 +30,10 @@ The architecture document does not own:
 - executed verification results and release evidence.
 
 Requirements define what the software shall do. The architecture defines the
-components and interactions that realize those obligations. SWCDs define the
-detailed units below each component. Configuration and interface specifications
-own their respective detailed contracts. ADRs record why significant choices
-were made.
+components and interactions that realize those obligations. Content below a
+component boundary belongs to its owning downstream design artifacts.
+Configuration and interface specifications own their respective detailed
+contracts. ADRs record why significant choices were made.
 
 ## Single architecture document
 
@@ -62,7 +62,8 @@ architecture changes. Do not create a second current document for a replacement
 design. Update affected forward and reverse trace links in the same Pull
 Request.
 
-Create or supersede an ADR according to [the ADR rule](adr/README.md) when the
+Create or supersede an ADR according to
+[the ADR rule](/docs/design/architecture/adr/README.md) when the
 change alters a significant accepted decision. The architecture document owns
 the current result; the ADR chain preserves decision history.
 
@@ -147,9 +148,9 @@ conceptual data movement between architecture components, including the
 producer, consumer, and meaning of the exchanged information when relevant.
 
 Do not place a detailed data-flow diagram, concrete type, transformation,
-queue, buffer, or implementation design here. Move those details to the
-dedicated component when it is introduced, and leave a brief conceptual summary
-in this subsection.
+queue, buffer, or implementation design here. Keep those details in their
+owning downstream design or implementation artifacts, and leave a brief
+conceptual summary in this subsection.
 
 #### Control Flow
 
@@ -167,8 +168,8 @@ Describe component-level states, transition triggers, and state-dependent
 behavior only when the architecture requires a state machine. Otherwise write
 `Not applicable: <reason>`.
 
-Keep implementation states and detailed transition actions in the downstream
-SWCD.
+Keep details below architecture-level states and transitions in their owning
+downstream design artifacts.
 
 ### Components
 
@@ -204,9 +205,10 @@ form:
 [swad-component-01](#swad-component-01)
 ```
 
-Do not describe implementation units. In particular, do not list namespaces,
+Do not describe constituent units. In particular, do not list namespaces,
 classes, functions, source files, libraries, executables, or build targets as
-units owned by the component. The downstream SWCD owns that decomposition.
+units owned by the architecture component. Content below the component boundary
+belongs to its owning downstream design artifacts.
 
 #### Responsibility
 
@@ -225,8 +227,10 @@ Describe inputs and outputs abstractly as information, events, requests,
 responses, or control. Use one item for each distinct input or output.
 
 Do not specify concrete data types, parameters, function signatures, wire
-formats, or implementation messages. Those details belong to an SWCD or
-interface specification.
+formats, or implementation messages. The component's `Input` and `Output`
+entries are the authoritative architecture-level boundary description.
+Detailed contracts belong to their owning downstream design or interface
+specification.
 
 #### Relationships
 
@@ -257,15 +261,23 @@ met. Explain an unusual inclusion or exclusion in the component description.
 
 Keep traceability local to each component:
 
-- `Upstream` links every SWR allocated wholly or partly to the component.
-- `Downstream` links the SWCD that defines the component's detailed design.
+- `Upstream` links every SWR allocated wholly or partly to the component. Every
+  accepted architecture component shall link at least one accepted SWR.
+- `Downstream` links directly to the owning SWCD document.
 - `Configuration` links configuration specifications that select, include,
   exclude, or change the component.
 
-Use `[ID](location)` and one target per nested list item. The linked SWR shall
-provide the reverse downstream link using the component ID and explicit anchor.
-The linked SWCD and configuration specification shall provide their applicable
-reverse links.
+Use `[ID](/PATH/TO/TARGET)` and one target per nested list item when a target
+has a stable ID. Use a project-root absolute path when the target is outside
+the current document's directory. A target in the same directory may use a
+relative filename, and a target in the same document may use its local anchor.
+The linked SWR shall provide the reverse downstream link using the component ID
+and explicit anchor. An SWCD has no separate design ID: link the SWCD file
+directly from the architecture `Downstream` relationship. Its link label is
+descriptive and need not match the SWCD title. The SWCD shall provide the
+reverse `Upstream` link using the owning `swad-component-NN` ID and explicit
+anchor. Add or update both links in the same Pull Request. A linked
+configuration specification shall provide its applicable reverse link.
 
 Keep all three relationship labels. When no concrete target exists, leave the
 label without a nested item. Do not write `None`, `TBD`, a placeholder, or a
@@ -277,9 +289,10 @@ Keep this section and provide only a brief conceptual summary of each external
 interface and its architecture boundary. Link every external interface
 specification that already exists.
 
-Move detailed operations, data definitions, protocols, error behavior, timing,
-compatibility, and implementation constraints to the owning external interface
-specification. Do not duplicate those details in the architecture document.
+Keep detailed operations, data definitions, protocols, error behavior, timing,
+compatibility, and implementation constraints in their owning downstream
+design or external interface specification. Do not duplicate those details in
+the architecture document.
 
 When the software has no external interface, retain the section and write
 `Not applicable: <reason>`.
@@ -293,18 +306,18 @@ process, pipeline stage, or processor core.
 #### Threads
 
 Keep this subsection. Describe conceptual execution contexts, concurrency
-needs, and their relationship to components. When the dedicated component is
-introduced, move detailed thread ownership, scheduling, synchronization,
-lifecycle, priority, and implementation to that component. Retain only the
-conceptual summary and a link to the detailed design.
+needs, and their relationship to components. Keep detailed thread ownership,
+scheduling, synchronization, lifecycle, priority, and implementation in their
+owning downstream design or implementation artifacts. Retain only the
+conceptual architecture summary and applicable downstream links.
 
 #### Pipelines
 
 Keep this subsection. Describe conceptual processing stages, stage ordering,
-and concurrency. When the dedicated component is introduced, move detailed
-pipeline ownership, buffering, backpressure, scheduling, and implementation to
-that component. Retain only the conceptual summary and a link to the detailed
-design.
+and concurrency. Keep detailed collaboration, buffering, backpressure,
+scheduling, and implementation in their owning downstream design or
+implementation artifacts. Retain only the conceptual architecture summary and
+applicable downstream links.
 
 #### Timing Constraints
 
@@ -321,8 +334,9 @@ Describe shared resources when they affect component ownership, lifetime,
 access rules, synchronization, or failure containment. Otherwise write
 `Not applicable: <reason>`.
 
-Keep source-level locks, containers, handles, and allocation algorithms in the
-downstream SWCD.
+Keep detailed ownership, synchronization, source-level locks, containers,
+handles, and allocation algorithms in their owning downstream design or
+implementation artifacts.
 
 #### Hardware/Core Mapping
 
@@ -336,7 +350,8 @@ because it appears as one component or sequence participant.
 ## Architecture Decision Records
 
 Create an ADR when a choice meets the criteria in
-[the ADR rule](adr/README.md#when-to-write-an-adr). State the current design in
+[the ADR rule](/docs/design/architecture/adr/README.md#when-to-write-an-adr).
+State the current design in
 the applicable architecture section and link the accepted ADR from that
 explanation. The ADR owns context, alternatives, decision rationale, and
 consequences.

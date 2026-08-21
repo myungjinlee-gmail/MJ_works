@@ -23,7 +23,7 @@ in this document.
 `SWRVS-<DOMAIN>-<NNN>`
 
 - Covers:
-    - [<SWR-ID>](<location>)
+    - [<SWR-ID>](SWR-DOMAIN-NNN-title.md)
 
 ## Acceptance Criteria
 

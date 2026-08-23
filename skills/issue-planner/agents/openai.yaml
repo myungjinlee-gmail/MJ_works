@@ -1,0 +1,12 @@
+interface:
+    display_name: "Issue Planner"
+    short_description: "Resolve issue gaps, then create executable local plans"
+    default_prompt: "Use $issue-planner to refine local issue.md through add, replace, or remove Proposals, create plan.md and plan.yaml after resolution, and optionally preview an approved compact GitHub issue summary for Pull Request traceability."
+
+dependencies:
+    tools:
+        - type: "mcp"
+          value: "github"
+          description: "Read GitHub planning context and, after explicit approval, update only a managed issue summary"
+          transport: "streamable_http"
+          url: "https://api.githubcopilot.com/mcp/"

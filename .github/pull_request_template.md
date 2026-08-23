@@ -12,6 +12,24 @@ close #
 
 -
 
+## Supporting Tools
+
+<!--
+Use `None` when this PR includes no optional supporting tool. Otherwise list
+each tool with all fields below. This section is author-editable.
+-->
+
+None
+
+<!--
+- Path or identifier:
+- Reason for addition:
+- Relationship to the linked issue:
+- Evidence of no product, linked-issue requirements or acceptance criteria,
+  design, repository-lifecycle, or repository-process impact:
+- Verification results:
+-->
+
 ## Verification
 
 <!-- List executed commands/checks and their results or links. -->
@@ -89,7 +107,7 @@ Follow-up issues: <issue links, or None>
 
 | ID | Result | Review check and evidence or N/A reason |
 | --- | --- | --- |
-| SCOPE | PASS / FAIL / N/A | Matches the issue; no unrelated work. |
+| SCOPE | PASS / FAIL / N/A | Every change is classified as direct implementation, necessary consequential policy or documentation, or an eligible and disclosed optional supporting tool, including permitted opt-in internal contracts; unrelated or ineligible work, repository-wide new norms, issue-acceptance or repository-lifecycle prerequisites, and repository-lifecycle bypasses are rejected. |
 | TRACE | PASS / FAIL / N/A | Requirements, design, code, tests, and docs are consistent. |
 | CORRECT | PASS / FAIL / N/A | Normal, boundary, error, state, and concurrency behavior is correct. |
 | INTERFACE | PASS / FAIL / N/A | Compatibility, ownership, lifetime, errors, and thread safety are explicit. |

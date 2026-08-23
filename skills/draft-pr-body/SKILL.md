@@ -1,27 +1,42 @@
 ---
 name: draft-pr-body
-description: Draft concise English GitHub pull request titles and bodies from the repository workflow, PR template, and current branch diff. Use when Codex is asked to create, rewrite, or review a PR title, description, or body before creating or updating a pull request.
+description: Draft concise GitHub pull request titles and bodies from the repository workflow, PR template, and current branch diff. Use when Codex is asked to create, rewrite, or review a PR title, description, or body before creating or updating a pull request.
 ---
 
 # Draft PR Title and Body
 
 ## Workflow
 
-1. Read `docs/process/git_workflow.md`,
+1. Prefer an available MCP tool for Git and GitHub operations. Use local Git or
+    a command-line client only when MCP is unavailable or does not support the
+    required operation.
+2. Read `docs/process/git_workflow.md`,
     `docs/design/requirement/README.md`, and
     `.github/pull_request_template.md`.
     Preserve the template's section order, headings, fixed wording, and reviewer
     checklist items.
-2. Determine the intended base branch from the request or PR metadata. Otherwise,
+3. Determine the intended base branch from the request or PR metadata. Otherwise,
     use `main` when it exists.
-3. Inspect the complete branch change with the merge base, commit log, diff stat,
+4. Inspect the complete branch change with the merge base, commit log, diff stat,
     changed-file list, and relevant diff content. Check the worktree separately and
     do not treat uncommitted changes as part of the PR unless the user requests it.
-4. Identify the related issue from the request, branch name, commit messages, or PR
+5. Identify the related issue from the request, branch name, commit messages, or PR
     metadata. Never invent an issue number. Determine whether this Pull Request
     completes that issue or only references work that continues in later Pull
     Requests.
-5. When the change concerns an SWR, SWRVS, downstream implementation, or
+6. Use only the linked GitHub Issue and repository policies as authoritative
+    sources for requirements, acceptance criteria, and scope. Local plans may
+    identify changed files or provide non-authoritative context, but shall not
+    add requirements or acceptance criteria. Classify every file in the complete
+    diff as direct implementation, necessary consequential policy or
+    documentation, an eligible optional supporting tool, or unrelated work.
+    Apply the eligibility and precedence rules in `docs/process/git_workflow.md`.
+    Treat disclosed tool-internal schemas, references, metadata, scripts, state
+    models, and validators as parts of a category 3 tool rather than as direct
+    issue requirements when that policy makes the tool eligible.
+    Treat an unclear classification, an unsupported eligibility claim, and any
+    unrelated or ineligible change as an unresolved scope problem.
+7. When the change concerns an SWR, SWRVS, downstream implementation, or
     verification implementation, read the applicable authoring rules and verify
     that the diff follows the requirement Pull Request sequence. Require a new
     SWR and all SWRVS artifacts needed to cover it in one authoring Pull Request.
@@ -29,12 +44,17 @@ description: Draft concise English GitHub pull request titles and bodies from th
     Permit an SWRVS-only correction when the SWR does not change, and permit a
     later stage's required trace-only update. Report authoring mixed with
     downstream or verification implementation as a scope problem.
-6. Draft the PR title from the complete change and related issue, following the
+8. Draft the PR title from the complete change and related issue, following the
     commit message rule in `docs/process/git_workflow.md`.
-7. Fill only the author-editable template sections. Remove their HTML guidance
+9. Fill only the author-editable template sections. Remove their HTML guidance
     comments and empty placeholders. Preserve the complete `Review` section
-    verbatim unless the user explicitly asks to change the review policy.
-8. Recheck the title and every body statement against the diff and available
+    verbatim unless the user explicitly asks to change the review policy. In
+    `Supporting Tools`, write `None` when there is no eligible optional tool.
+    Otherwise, disclose every tool's path or identifier, reason for addition,
+    relationship to the linked issue, evidence that it has no product,
+    linked-issue requirements or acceptance criteria, design, repository
+    lifecycle, or repository-process impact, and verification results.
+10. Recheck the title and every body statement against the diff and available
     verification evidence.
 
 ## Writing Rules
@@ -56,6 +76,15 @@ description: Draft concise English GitHub pull request titles and bodies from th
 - Do not claim that tests or CI passed without evidence.
 - Keep the template structure. Do not add sections unless the user requests them.
 - Avoid implementation trivia, repetition, promotional language, and vague claims.
+- Write new narrative in local PR drafts and temporary working files in the
+  language used by the user in the current request.
+- Before creating or updating a remote Pull Request, explicitly ask the user to
+  confirm the target language and wait for both that choice and separate
+  authorization for the remote write. Use the confirmed language for new remote
+  narrative.
+- A content-language change shall not translate or otherwise alter this skill's
+  Markdown headings, the Pull Request template's headings or fixed wording,
+  machine-readable tokens, commands, code, or quoted source text.
 
 ## Output
 

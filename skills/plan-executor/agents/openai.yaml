@@ -1,0 +1,4 @@
+interface:
+    display_name: "Plan Executor"
+    short_description: "Execute approved goals from plan.yaml"
+    default_prompt: "Use $plan-executor to execute the approved goals in the requested plan/<issue-number>/plan.yaml."

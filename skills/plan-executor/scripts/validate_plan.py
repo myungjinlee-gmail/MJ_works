@@ -67,9 +67,38 @@ def _slug(text: str) -> str:
     return value.strip("-")
 
 
+def _markdown_lines_outside_fences(text: str) -> list[tuple[int, str]]:
+    lines: list[tuple[int, str]] = []
+    fence_character = ""
+    fence_length = 0
+    for index, line in enumerate(text.splitlines()):
+        if fence_character:
+            closing_fence = re.fullmatch(
+                rf" {{0,3}}{re.escape(fence_character)}{{{fence_length},}}[ \t]*",
+                line,
+            )
+            if closing_fence:
+                fence_character = ""
+                fence_length = 0
+            continue
+
+        opening_fence = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if opening_fence:
+            marker, info = opening_fence.groups()
+            if marker[0] == "`" and "`" in info:
+                lines.append((index, line))
+                continue
+            fence_character = marker[0]
+            fence_length = len(marker)
+            continue
+
+        lines.append((index, line))
+    return lines
+
+
 def _heading_map(text: str) -> dict[str, list[str]]:
     result: dict[str, list[str]] = {}
-    for line in text.splitlines():
+    for _, line in _markdown_lines_outside_fences(text):
         match = HEADING.fullmatch(line)
         if match:
             result.setdefault(_slug(match.group(2)), []).append(match.group(2))
@@ -77,20 +106,24 @@ def _heading_map(text: str) -> dict[str, list[str]]:
 
 
 def _heading_sections(text: str) -> list[tuple[int, str, list[str]]]:
-    lines = text.splitlines()
+    line_count = len(text.splitlines())
+    structural_lines = _markdown_lines_outside_fences(text)
     headings: list[tuple[int, int, str]] = []
-    for index, line in enumerate(lines):
+    for index, line in structural_lines:
         match = HEADING.fullmatch(line)
         if match:
             headings.append((index, len(match.group(1)), match.group(2)))
     sections: list[tuple[int, str, list[str]]] = []
     for position, (start, level, title) in enumerate(headings):
-        end = len(lines)
+        end = line_count
         for next_start, next_level, _ in headings[position + 1 :]:
             if next_level <= level:
                 end = next_start
                 break
-        sections.append((level, title, lines[start + 1 : end]))
+        section_lines = [
+            line for index, line in structural_lines if start < index < end
+        ]
+        sections.append((level, title, section_lines))
     return sections
 
 
@@ -858,6 +891,24 @@ def validate_plan(plan_path: Path, execution_ready: bool = False) -> list[str]:
 
 
 def self_test() -> None:
+    fenced_markdown = (
+        "# Real\n\n"
+        "````markdown\n"
+        "## G-999: Backtick example\n"
+        "```\n"
+        "### Purpose\n"
+        "````\n\n"
+        "~~~markdown\n"
+        "## G-998: Tilde example\n"
+        "~~~\n\n"
+        "## G-001: Actual Goal\n"
+    )
+    heading_map = _heading_map(fenced_markdown)
+    assert set(heading_map) == {"real", "g-001-actual-goal"}
+    goal_errors: list[str] = []
+    assert set(_goal_sections(fenced_markdown, goal_errors)) == {"G-001"}
+    assert goal_errors == []
+
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory) / "1"
         root.mkdir()
@@ -865,6 +916,9 @@ def self_test() -> None:
         human = root / "plan.md"
         issue.write_text(
             "# Issue\n\n"
+            "```markdown\n"
+            "### Purpose\n\n- Example only.\n"
+            "```\n\n"
             "### Purpose\n\n- Deliver the work.\n\n"
             "### Known impact\n\n"
             "- `docs/example.md`\n"
@@ -877,6 +931,10 @@ def self_test() -> None:
         )
         human.write_text(
             "# Plan\n\n"
+            "~~~markdown\n"
+            "## G-999: Example Goal\n\n"
+            "### Requirements\n\n- `issue.md#example`\n"
+            "~~~\n\n"
             "## G-001: Do the work\n\n"
             "### Requirements\n\n"
             "- `issue.md#detailed-requirements`\n\n"

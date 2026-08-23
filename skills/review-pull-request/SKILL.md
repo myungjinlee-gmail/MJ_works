@@ -77,8 +77,14 @@ required operation.
    separate-issue, lifecycle, and repository or domain precedence rules in
    `docs/process/git_workflow.md`; confirm that every required disclosure
    appears in the Pull Request's `Supporting Tools` section; and include the
-   tool in the normal quality review. Fail `SCOPE` for unrelated work, an
-   ineligible tool, missing disclosure, a new norm, or a lifecycle bypass.
+   tool in the normal quality review. Treat disclosed tool-internal schemas,
+   references, metadata, scripts, state models, and validators as parts of the
+   category 3 tool rather than as direct issue requirements when that policy
+   makes the tool eligible. Do not fail `SCOPE` merely because such contracts
+   apply during the tool's explicit opt-in operation. Fail `SCOPE` for unrelated
+   work, an ineligible tool, missing disclosure, a repository-wide new norm or
+   a prerequisite for issue acceptance or repository lifecycle verification,
+   or a repository lifecycle bypass.
 8. Classify the lifecycle gate before evaluating completeness:
    - `Requirement authoring`: for a new SWR, apply both the SWR and SWRVS PR
      checklists. Require all SWRVS artifacts needed to cover the SWR and complete

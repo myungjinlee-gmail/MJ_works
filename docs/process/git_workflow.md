@@ -63,14 +63,25 @@ Examples:
   be moved to a separate issue and Pull Request.
 - A category 3 supporting tool is eligible only when it is discovered or
   created while implementing the linked issue, is optional for acceptance,
-  automates existing policy without establishing a new norm, does not change
-  product behavior, requirements, design, lifecycle, CI, review, merge,
-  release, or external-write behavior, and is isolated, reviewable, verified,
-  and disclosed in the Pull Request description.
+  does not change product behavior, the linked issue's requirements or
+  acceptance criteria, design interfaces, repository lifecycle rules, CI,
+  review, merge, release, or external-write permissions, does not establish a
+  repository-wide policy or make itself or its internal contract a mandatory
+  product, requirement, design, CI, review, merge, release, or lifecycle rule,
+  and is isolated, reviewable, verified, and disclosed in the Pull Request
+  description.
+- An eligible supporting tool may define internal schemas, references,
+  metadata, helper scripts, state models, and validation contracts needed for
+  its explicit opt-in operation. These internal contracts remain part of the
+  category 3 tool, do not become Pull Request requirements or acceptance
+  criteria, and shall not become repository-wide prerequisites. Tool-specific
+  self-tests and validation evidence support normal quality review and do not
+  become independent product or repository-process acceptance criteria.
 - Create a separate issue or update the linked issue before including a tool
-  that defines a normative workflow, becomes an acceptance or lifecycle
-  prerequisite, needs independent acceptance criteria, or bypasses a required
-  lifecycle step.
+  that adds or changes repository-wide normative workflow behavior, becomes a
+  prerequisite for issue acceptance or a repository lifecycle verification
+  step, needs independent product or repository-process acceptance criteria,
+  or bypasses or weakens a required repository lifecycle boundary.
 - Repository and applicable domain policies take precedence over supporting
   artifacts and cannot be relaxed by the scope classification.
 - A normal working branch shall target `main`.

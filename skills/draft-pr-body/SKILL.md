@@ -31,6 +31,9 @@ description: Draft concise GitHub pull request titles and bodies from the reposi
     diff as direct implementation, necessary consequential policy or
     documentation, an eligible optional supporting tool, or unrelated work.
     Apply the eligibility and precedence rules in `docs/process/git_workflow.md`.
+    Treat disclosed tool-internal schemas, references, metadata, scripts, state
+    models, and validators as parts of a category 3 tool rather than as direct
+    issue requirements when that policy makes the tool eligible.
     Treat an unclear classification, an unsupported eligibility claim, and any
     unrelated or ineligible change as an unresolved scope problem.
 7. When the change concerns an SWR, SWRVS, downstream implementation, or
@@ -49,7 +52,8 @@ description: Draft concise GitHub pull request titles and bodies from the reposi
     `Supporting Tools`, write `None` when there is no eligible optional tool.
     Otherwise, disclose every tool's path or identifier, reason for addition,
     relationship to the linked issue, evidence that it has no product,
-    requirements, design, or lifecycle impact, and verification results.
+    linked-issue requirements or acceptance criteria, design, repository
+    lifecycle, or repository-process impact, and verification results.
 10. Recheck the title and every body statement against the diff and available
     verification evidence.
 

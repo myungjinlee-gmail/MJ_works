@@ -89,7 +89,11 @@ architecture introduces no component-level state machine.
         - [swad-component-02](#swad-component-02)
 - Traceability:
     - Upstream:
-        - [SWR-CFG-001](/docs/design/requirement/software_requirement_example.md)
+        <!--
+        Illustrative exception: this example has no companion SWR for SDK Core.
+        Every component in an accepted architecture shall have at least one
+        concrete SWR link under Upstream.
+        -->
     - Downstream:
     - Configuration:
 

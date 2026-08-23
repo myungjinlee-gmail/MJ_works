@@ -188,16 +188,6 @@ Keep `Downstream` empty until an accepted unit-design artifact governed by
 issue #31 exists and applies to the unit. Do not write `None`, `TBD`, a
 placeholder, or a prospective link for a missing or inapplicable artifact.
 
-Store a unit-design document alongside its unit source files at
-`src/<component-name>/<unit-name>/<unit-name>.md`. Its Markdown filename stem
-shall exactly match the containing unit directory name.
-
-When an accepted unit-design document exists and applies to the unit, link it
-from the SWCD as
-`[<unit-design-ID>](/src/<component-name>/<unit-name>/<unit-name>.md)`. Add the
-reverse `[swcd-unit-NN](/src/<component-name>/<component-name>.md#swcd-unit-NN)`
-link to the unit-design document in the same Pull Request.
-
 ### Configuration Effects
 
 Describe how configuration affects the component and its abstract unit

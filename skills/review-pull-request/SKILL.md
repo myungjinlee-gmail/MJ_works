@@ -9,6 +9,10 @@ Review the current PR head against its issue, repository policies, changed
 behavior, and verification evidence. Treat `.github/pull_request_template.md`
 as the source of truth; do not copy its checklist into this skill.
 
+Prefer an available MCP tool for Git and GitHub operations. Use local Git or a
+command-line client only when MCP is unavailable or does not support the
+required operation.
+
 ## Review workflow
 
 1. Read repository instructions and `.github/pull_request_template.md` in full.

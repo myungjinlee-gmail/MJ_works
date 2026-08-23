@@ -7,21 +7,24 @@ description: Draft concise English GitHub pull request titles and bodies from th
 
 ## Workflow
 
-1. Read `docs/process/git_workflow.md`,
+1. Prefer an available MCP tool for Git and GitHub operations. Use local Git or
+    a command-line client only when MCP is unavailable or does not support the
+    required operation.
+2. Read `docs/process/git_workflow.md`,
     `docs/design/requirement/README.md`, and
     `.github/pull_request_template.md`.
     Preserve the template's section order, headings, fixed wording, and reviewer
     checklist items.
-2. Determine the intended base branch from the request or PR metadata. Otherwise,
+3. Determine the intended base branch from the request or PR metadata. Otherwise,
     use `main` when it exists.
-3. Inspect the complete branch change with the merge base, commit log, diff stat,
+4. Inspect the complete branch change with the merge base, commit log, diff stat,
     changed-file list, and relevant diff content. Check the worktree separately and
     do not treat uncommitted changes as part of the PR unless the user requests it.
-4. Identify the related issue from the request, branch name, commit messages, or PR
+5. Identify the related issue from the request, branch name, commit messages, or PR
     metadata. Never invent an issue number. Determine whether this Pull Request
     completes that issue or only references work that continues in later Pull
     Requests.
-5. When the change concerns an SWR, SWRVS, downstream implementation, or
+6. When the change concerns an SWR, SWRVS, downstream implementation, or
     verification implementation, read the applicable authoring rules and verify
     that the diff follows the requirement Pull Request sequence. Require a new
     SWR and all SWRVS artifacts needed to cover it in one authoring Pull Request.
@@ -29,12 +32,12 @@ description: Draft concise English GitHub pull request titles and bodies from th
     Permit an SWRVS-only correction when the SWR does not change, and permit a
     later stage's required trace-only update. Report authoring mixed with
     downstream or verification implementation as a scope problem.
-6. Draft the PR title from the complete change and related issue, following the
+7. Draft the PR title from the complete change and related issue, following the
     commit message rule in `docs/process/git_workflow.md`.
-7. Fill only the author-editable template sections. Remove their HTML guidance
+8. Fill only the author-editable template sections. Remove their HTML guidance
     comments and empty placeholders. Preserve the complete `Review` section
     verbatim unless the user explicitly asks to change the review policy.
-8. Recheck the title and every body statement against the diff and available
+9. Recheck the title and every body statement against the diff and available
     verification evidence.
 
 ## Writing Rules

@@ -10,6 +10,10 @@ implementation plan. Keep the boundary strict: the GitHub issue states concise
 purpose, scope, outcomes, and acceptance intent; `issue.md` says in detail what
 must be done; `plan.md` says how to do it. Treat GitHub as read-only by default.
 
+Prefer an available MCP tool for Git and GitHub operations. Use local Git or a
+command-line client only when MCP is unavailable or does not support the
+required operation.
+
 ## Artifact contract
 
 Create these files under the repository root:

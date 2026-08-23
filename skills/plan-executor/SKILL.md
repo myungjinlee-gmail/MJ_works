@@ -10,6 +10,10 @@ workflow. Treat
 `issue.md` and `plan.md` as immutable inputs and `plan.yaml` as the machine
 execution contract and progress record.
 
+Prefer an available MCP tool for Git and GitHub operations. Use local Git or a
+command-line client only when MCP is unavailable or does not support the
+required operation.
+
 ## Input contract
 
 Accept an explicit path such as `plan/<issue-number>/plan.yaml`. Read

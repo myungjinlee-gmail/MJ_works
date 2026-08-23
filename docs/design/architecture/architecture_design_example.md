@@ -3,9 +3,8 @@
 > **Illustrative example — non-normative.**
 >
 > This file demonstrates the architecture design format. It is not the
-> software's accepted architecture and does not serve as product authority. The
-> component diagram asset paths illustrate the required source-and-render links;
-> the assets are not part of this example.
+> software's accepted architecture and does not serve as product authority.
+> Diagram assets are intentionally omitted from this example.
 
 ## Scope
 
@@ -58,9 +57,8 @@ thread per component.
 
 The SDK core passes abstract hardware requests to Hardware Service Boundary and
 receives target-independent results. The boundary passes the request to the
-selected implementation. Concrete request types, result types, and data-flow
-details will move to the dedicated hardware-service component design when it is
-introduced.
+selected implementation. Details below this conceptual flow remain in their
+owning downstream design or implementation artifacts.
 
 #### Control Flow
 
@@ -119,8 +117,9 @@ architecture introduces no component-level state machine.
         - [swad-component-05](#swad-component-05)
 - Traceability:
     - Upstream:
-        - [SWR-CFG-001](../requirement/software_requirement_example.md)
+        - [SWR-CFG-001](/docs/design/requirement/software_requirement_example.md)
     - Downstream:
+        - [SWCD](/docs/design/component/component_design_example.md)
     - Configuration:
 
 The three `Uses` relationships are mutually exclusive configured alternatives;
@@ -141,7 +140,7 @@ they are not simultaneous runtime dependencies.
     - Uses:
 - Traceability:
     - Upstream:
-        - [SWR-CFG-001](../requirement/software_requirement_example.md)
+        - [SWR-CFG-001](/docs/design/requirement/software_requirement_example.md)
     - Downstream:
     - Configuration:
 
@@ -160,7 +159,7 @@ they are not simultaneous runtime dependencies.
     - Uses:
 - Traceability:
     - Upstream:
-        - [SWR-CFG-001](../requirement/software_requirement_example.md)
+        - [SWR-CFG-001](/docs/design/requirement/software_requirement_example.md)
     - Downstream:
     - Configuration:
 
@@ -179,33 +178,30 @@ they are not simultaneous runtime dependencies.
     - Uses:
 - Traceability:
     - Upstream:
-        - [SWR-CFG-001](../requirement/software_requirement_example.md)
+        - [SWR-CFG-001](/docs/design/requirement/software_requirement_example.md)
     - Downstream:
     - Configuration:
 
 ### Interfaces
 
-This architecture introduces no external software interface. Hardware Service
-Boundary is internal to the SDK. If the SDK later exposes a public hardware
-interface, this section will retain its conceptual boundary and link the owning
-external interface specification.
-
-- External interface specifications:
+Not applicable: this illustrative architecture introduces no external software
+interface; Hardware Service Boundary is internal to the SDK.
 
 ### Execution Architecture
 
 #### Threads
 
 Hardware requests execute in the caller's conceptual execution context. The
-architecture does not assign one thread to each component. Detailed thread
-ownership and synchronization will move to a dedicated execution component if
-one is introduced.
+architecture does not assign one thread to each component. Detailed execution
+and synchronization decisions belong to their owning downstream design or
+implementation artifacts.
 
 #### Pipelines
 
 This design contains no processing pipeline. The section remains so a future
 conceptual pipeline can be described here, while buffering, backpressure,
-scheduling, and implementation move to a dedicated pipeline component.
+scheduling, and implementation remain in their owning downstream design or
+implementation artifacts.
 
 #### Timing Constraints
 
@@ -215,8 +211,8 @@ constraint.
 #### Shared Resources
 
 Each selected hardware implementation owns its target-private resources. The
-detailed resource types, handles, lifetime, and synchronization will be defined
-in its downstream SWCD.
+detailed resource types, handles, lifetime mechanisms, and synchronization
+belong to their owning downstream design or implementation artifacts.
 
 #### Hardware/Core Mapping
 

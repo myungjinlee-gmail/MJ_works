@@ -47,14 +47,16 @@ Link exactly one ticket that directly caused this requirement to be created.
 Explain why the requirement is needed, not how it will be implemented.
 -->
 
-Initial ticket: [<TICKET-ID>](<location>)
+Initial ticket: [<TICKET-ID>](https://HOST/OWNER/REPOSITORY/issues/NNN)
 
 <Reason this requirement is needed>
 
 ## Traceability
 
 <!--
-Use [ID](location) for every target and one target per nested list item.
+Use [ID](/PATH/TO/TARGET) for targets outside this directory and one target per
+nested list item. A target in this directory may use its filename relative to
+this document.
 Upstream includes the initial ticket and any direct parent requirement.
 Downstream identifies design artifacts that realize this requirement.
 Verification identifies Software Requirement Verification Specs, not tests or
@@ -66,7 +68,7 @@ verification-ready or adding it to a release baseline.
 -->
 
 - Upstream:
-    - [<ID>](<location>)
+    - [<ID>](/PATH/TO/TARGET)
 - Downstream:
 - Verification:
-    - [SWRVS-<DOMAIN>-<NNN>](<location>)
+    - [SWRVS-<DOMAIN>-<NNN>](SWRVS-DOMAIN-NNN-verification-title.md)

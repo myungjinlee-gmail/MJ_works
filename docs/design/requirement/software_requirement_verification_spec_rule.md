@@ -45,7 +45,8 @@ authored SWRVS directory and filename rules.
 Write the canonical SWRVS ID as the standalone value in the `ID` section.
 
 Place one `Covers` list immediately below the ID. Link exactly one software
-requirement using `[ID](location)`:
+requirement using its canonical ID. Because the requirement and its SWRVS share
+one directory, use the requirement filename as the relative target:
 
 ```markdown
 ## ID
@@ -192,8 +193,11 @@ complete. Keep traceability local to each VM:
   checklists, or other verification implementations that already exist. It may
   have no targets while those implementation artifacts do not yet exist.
 
-Use `[ID](location)` and one target per nested list item. Do not duplicate VM
-trace links in a global SWRVS traceability section.
+Use `[ID](/PATH/TO/TARGET)` and one target per nested list item. Use a
+project-root absolute path when the target is outside the current document's
+directory. A target in the same directory may use a relative filename, and a
+target in the same document may use its local anchor. Do not duplicate VM trace
+links in a global SWRVS traceability section.
 
 Keep the `Verification implementation` label when it has no target. Do not use
 `None`, `TBD`, a placeholder, or a link to a planned location in an accepted

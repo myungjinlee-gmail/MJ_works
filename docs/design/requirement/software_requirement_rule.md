@@ -203,22 +203,24 @@ not a table:
 
 - Upstream:
     - [ISSUE-22](https://github.com/myungjinlee-gmail/MJ_works/issues/22)
-    - [SWR-SYS-001](SWR-SYS-001-system-configuration.md)
+    - [SWR-SYS-001](/docs/design/requirement/SWR-SYS-001/SWR-SYS-001-system-configuration.md)
 - Downstream:
-    - [swad-component-02](../architecture/architecture_design_example.md#swad-component-02)
+    - [swad-component-02](/docs/design/architecture/architecture_design_example.md#swad-component-02)
 - Verification:
     - [SWRVS-CFG-001](software_requirement_verification_example_rule.md)
 ```
 
-Every target shall use:
+A target outside the current document's directory shall use:
 
 ```markdown
-[<ID>](<location>)
+[<ID>](/PATH/TO/TARGET)
 ```
 
 The link label is the target's canonical ID, not a title or description. Write
-one target per nested list item. Use repository-relative links for live
-repository artifacts and external URLs for external artifacts.
+one target per nested list item. Use a project-root absolute path for a live
+repository artifact outside the current document's directory. A target in the
+same directory may use a relative filename, and a target in the same document
+may use its local anchor. Use an external URL for an external artifact.
 
 Use a stable ID anchor, implemented as a heading or explicit anchor, when a file
 contains multiple identified targets. Use a commit-specific permalink when
@@ -265,8 +267,8 @@ while its design artifacts do not yet exist.
 Keep the `Upstream`, `Downstream`, and `Verification` relationship labels even
 when a relationship has no target. Do not use `None`, `TBD`, a placeholder, or
 a link to a planned location in an accepted requirement. Add concrete
-`[ID](location)` links incrementally as the corresponding artifacts are added,
-and add the reverse link in the same Pull Request.
+`[ID](/PATH/TO/TARGET)` links incrementally as the corresponding artifacts are
+added, and add the reverse link in the same Pull Request.
 
 A requirement becomes verification-ready when the software implementation,
 downstream design, and verification implementations needed to evaluate its
@@ -294,7 +296,8 @@ or inclusion behavior explicitly when it is required.
 - Keep the skeleton heading order and exact section and subsection names.
 - Use explicit IDs instead of pronouns such as "the above requirement".
 - Write one trace target per nested list item.
-- Use `[ID](location)` for every trace and initial-ticket link.
+- Use `[ID](/PATH/TO/TARGET)` for every trace and initial-ticket link, with a
+  relative filename allowed only for a target in the same directory.
 - Keep the normative statement separate from rationale.
 - Keep acceptance criteria and verification details out of the requirement.
 - Define project-specific abbreviations in the owning document.

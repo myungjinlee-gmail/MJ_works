@@ -8,9 +8,9 @@ Replace every placeholder and remove instructional comments.
 | Field | Value |
 | --- | --- |
 | Date | `YYYY-MM-DD` |
-| Related requirements or designs | [<ID>](<location>), or `None` |
-| Supersedes | [<ADR-NNNN>](<location>), or `None` |
-| Superseded by | [<ADR-NNNN>](<location>), or `None` |
+| Related requirements or designs | [<ID>](/PATH/TO/TARGET), or `None` |
+| Supersedes | [<ADR-NNNN>](ADR-NNNN-title.md), or `None` |
+| Superseded by | [<ADR-NNNN>](ADR-NNNN-title.md), or `None` |
 
 ## Context
 

@@ -67,7 +67,19 @@ required operation.
      trace or verification result when newly changed design, code, test, analysis,
      checklist, or configuration can invalidate it even if the linked SWR or
      SWRVS file did not change.
-7. Classify the lifecycle gate before evaluating completeness:
+7. Classify every file in the complete reviewed change as direct implementation
+   of the linked issue, necessary consequential policy or documentation, an
+   eligible optional supporting tool, or unrelated work. Use only the linked
+   GitHub Issue and repository policies as authoritative sources for scope,
+   requirements, and acceptance criteria. A local plan may identify changed
+   paths or provide non-authoritative context, but shall not add requirements or
+   acceptance criteria. For each supporting tool, apply the eligibility,
+   separate-issue, lifecycle, and repository or domain precedence rules in
+   `docs/process/git_workflow.md`; confirm that every required disclosure
+   appears in the Pull Request's `Supporting Tools` section; and include the
+   tool in the normal quality review. Fail `SCOPE` for unrelated work, an
+   ineligible tool, missing disclosure, a new norm, or a lifecycle bypass.
+8. Classify the lifecycle gate before evaluating completeness:
    - `Requirement authoring`: for a new SWR, apply both the SWR and SWRVS PR
      checklists. Require all SWRVS artifacts needed to cover the SWR and complete
      bidirectional SWR-to-SWRVS trace in the same Pull Request. For an SWRVS-only
@@ -83,7 +95,7 @@ required operation.
    - `Verification-ready claim`: require complete bidirectional traceability,
      actual implementation links, and the PR evidence needed to support the
      claim. Do not apply release-baseline quality checklists.
-8. Enforce the staged Pull Request boundary:
+9. Enforce the staged Pull Request boundary:
    - Require a new SWR and all SWRVS artifacts needed to cover it in the same
      requirement-authoring Pull Request.
    - Require a semantic SWR change and every affected AC or VM correction in the
@@ -94,21 +106,21 @@ required operation.
    - Fail `SCOPE` when requirement authoring is combined with downstream design,
      product code, verification implementation, or results. Require a semantic
      authoring correction discovered during implementation to land first.
-9. Trace requirements through implementation, tests, documentation, and build
+10. Trace requirements through implementation, tests, documentation, and build
    configuration. Prioritize correctness, safety, regressions, error paths,
    interface compatibility, ownership/lifetime, concurrency, and missing tests.
    Distinguish statement-level verifiability from lifecycle verification
    readiness. Do not report a permitted future relationship as missing, and do
    not require an unrelated Pull Request to repair pre-existing staged absence.
    Apply the Markdown link validation rules below to every changed Markdown link.
-10. Reconcile existing threads before creating findings. Confirm whether each
+11. Reconcile existing threads before creating findings. Confirm whether each
    prior request is resolved in the current scope and avoid duplicating an
    active thread.
-11. Complete every common checklist row from the PR template and every row from
+12. Complete every common checklist row from the PR template and every row from
     the resolved domain PR checklist set as `PASS`, `FAIL`, or justified `N/A`.
     Base each result on inspected evidence; do not infer that a test or check
     passed. Use the exact selected checklist text and group results by artifact.
-12. Select exactly one decision using the template criteria:
+13. Select exactly one decision using the template criteria:
    - `DO NOT MERGE` when any required item fails, evidence is missing, a CI
      check is not successful, or a blocking finding remains.
    - `MERGE` when all required items pass or have justified `N/A` results and no
@@ -187,6 +199,16 @@ Require the repository owner to document the self-review evidence and final
 decision for a self-authored Pull Request.
 
 ## GitHub submission
+
+Write new narrative in local review drafts and temporary working files in the
+language used by the user in the current request. Before posting review threads,
+a review summary, or other formal remote content, explicitly ask the user to
+confirm the target language and wait for both that choice and separate
+authorization for submission. Use the confirmed language for new remote
+narrative. A content-language change shall not translate or otherwise alter
+this skill's Markdown headings, the Pull Request template's headings or fixed
+wording, checklist identifiers, machine-readable tokens, commands, code, or
+quoted source text.
 
 Treat review submission as an external write. Inspect and draft the review when
 the user asks only to review; post threads or submit a GitHub review only when

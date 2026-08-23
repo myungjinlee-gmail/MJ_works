@@ -324,6 +324,16 @@ unchanged.
 
 ## Preservation rules
 
+- Write new narrative in local planning drafts and temporary working files in
+  the language used by the user in the current request. Preserve exact source
+  text and artifact-specific language requirements when they apply.
+- Before publishing a managed GitHub issue summary or other formal remote
+  content, explicitly ask the user to confirm the target language and wait for
+  both that choice and separate authorization for the remote write. Use the
+  confirmed language for new remote narrative.
+- A content-language change shall not translate or otherwise alter this skill's
+  Markdown headings, fixed source or template text, machine-readable tokens,
+  commands, code, or quoted source text.
 - Leave GitHub unchanged by default. The optional managed-summary procedure is
   the only allowed issue mutation.
 - Preserve current local text outside deliberate Proposal insertion and

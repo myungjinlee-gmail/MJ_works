@@ -87,6 +87,16 @@ resolved issue requirements.
 
 ## Mutation boundary
 
+- Write new narrative in temporary verification files and local working drafts
+  in the language used by the user in the current request. Preserve exact
+  source text and artifact-specific language requirements when they apply.
+- Before any authorized write of formal content to a remote system, explicitly
+  ask the user to confirm the target language and wait for both that choice and
+  separate authorization for the remote write. Use the confirmed language for
+  new remote narrative.
+- A content-language change shall not translate or otherwise alter this skill's
+  Markdown headings, fixed formats, machine-readable tokens, commands, code, or
+  quoted source text.
 - Never edit `issue.md` or `plan.md`.
 - Never change `schema_version`, source paths, hashes, plan approval, Goal IDs,
   titles, references, dependencies, changes, or verification static fields.

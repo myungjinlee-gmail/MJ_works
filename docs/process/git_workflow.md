@@ -50,7 +50,29 @@ Examples:
 ## Pull Requests
 
 - Each Pull Request shall link at least one GitHub Issue.
+- The linked GitHub Issue is the sole authoritative source for the Pull
+  Request's requirements and acceptance criteria. Local plans and other
+  supporting artifacts may provide context, but shall not add or change them.
 - The description shall state the scope, changes, and verification evidence.
+- Classify every changed file into exactly one scope category:
+  1. direct implementation of the linked issue;
+  2. necessary consequential policy or documentation updates;
+  3. eligible optional supporting tools; or
+  4. unrelated work.
+- Only categories 1 through 3 pass the `SCOPE` review check. Category 4 shall
+  be moved to a separate issue and Pull Request.
+- A category 3 supporting tool is eligible only when it is discovered or
+  created while implementing the linked issue, is optional for acceptance,
+  automates existing policy without establishing a new norm, does not change
+  product behavior, requirements, design, lifecycle, CI, review, merge,
+  release, or external-write behavior, and is isolated, reviewable, verified,
+  and disclosed in the Pull Request description.
+- Create a separate issue or update the linked issue before including a tool
+  that defines a normative workflow, becomes an acceptance or lifecycle
+  prerequisite, needs independent acceptance criteria, or bypasses a required
+  lifecycle step.
+- Repository and applicable domain policies take precedence over supporting
+  artifacts and cannot be relaxed by the scope classification.
 - A normal working branch shall target `main`.
 - A release work branch shall target its owning release branch.
 - A release branch shall target `main` when integrating completed release

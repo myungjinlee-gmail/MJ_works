@@ -3,83 +3,71 @@ description: Track an internal development task.
 title: "[Task] "
 labels: ["type:task"]
 body:
-  - type: textarea
-    id: purpose
-    attributes:
-      label: Purpose
-      description: Describe why this task is needed and what outcome it should achieve.
-      placeholder: |
-        - Why is this task needed?
-        - What should be true when this task is complete?
-    validations:
-      required: true
+    -
+        type: textarea
+        id: purpose
+        attributes:
+            label: Purpose
+            description: Describe why this task is needed and the high-level outcome it should achieve.
+            placeholder: |
+                - Why is this task needed?
+                - What high-level outcome should be true when the task is complete?
+        validations:
+            required: true
 
-  - type: textarea
-    id: known-impact
-    attributes:
-      label: Known impact
-      description: Specify the concrete files, functions, tests, and user-facing surfaces that need to be changed or verified.
-      placeholder: |
-        - Files to change:
-          - Example: src/parser/ConfigParser.cpp
-          - Example: src/parser/ConfigParser.hpp
+    -
+        type: textarea
+        id: known-impact
+        attributes:
+            label: Known impact
+            description: Separate known required changes from anticipated optional supporting tools; an optional tool is not required for acceptance and its internal contracts are not issue requirements.
+            placeholder: |
+                ### Required direct or consequential changes
+                - `path/to/file`: Required outcome or reason for the change
 
-        - Functions/classes/modules to change:
-          - Example: ConfigParser::parse()
-          - Example: ConfigParser class
+                ### Anticipated optional supporting tools
+                - `path/to/tool`: Why it may help; inclusion is not required for acceptance
+                - None
+        validations:
+            required: true
 
-        - Test files:
-          - Example: testcases/parser/ConfigParserTest.cpp
-          - Example: testcases/parser/config_parser_cases.json
+    -
+        type: textarea
+        id: detailed-requirements
+        attributes:
+            label: Detailed requirements
+            description: State the mandatory behavior and scope boundaries without prescribing implementation choices.
+            placeholder: |
+                - Required behavior or result:
+                - In scope:
+                - Out of scope:
+        validations:
+            required: true
 
-        - Affected CLI commands/libraries/jobs:
-          - Example: bin/config-validator
-          - Example: libmj_config.a
-    validations:
-      required: true
+    -
+        type: textarea
+        id: verification-acceptance
+        attributes:
+            label: Verification and acceptance
+            description: Define objective outcomes and evidence that distinguish a complete task from one that still requires assumptions.
+            placeholder: |
+                - Acceptance outcome:
+                - Verification method or evidence:
+                - Insufficient or rejected case:
+        validations:
+            required: true
 
-  - type: textarea
-    id: detailed-requirements
-    attributes:
-      label: Detailed requirements
-      description: List the specific requirements that must be implemented.
-      placeholder: |
-        - 
-        - 
-        - 
-    validations:
-      required: true
-
-  - type: textarea
-    id: verification-acceptance
-    attributes:
-      label: Verification and acceptance
-      description: Describe the required tests, verification steps, and acceptance criteria.
-      placeholder: |
-        - Unit tests written and passing:
-          - Example: testcases/parser/ConfigParserTest.cpp
-          - Example: Verify success and error cases for ConfigParser::parse()
-
-        - Acceptance tests written and passing:
-          - Example: testcases/acceptance/config_validator_test.cpp
-          - Example: Running bin/config-validator with a valid config exits with code 0 and prints the expected output
-
-        - Additional verification:
-          - Example: CMake build completes successfully
-          - Example: Existing regression tests pass
-          - Example: Manual CLI scenario completed
-          - Example: Logs/monitoring metrics reviewed
-    validations:
-      required: true
-
-  - type: textarea
-    id: constraints
-    attributes:
-      label: Constraints
-      description: List schedule, technical, operational, or policy constraints.
-      placeholder: |
-        - Schedule constraints:
-        - Technical constraints:
-        - Out of scope / must not change:
-    validations:
-      required: true
+    -
+        type: textarea
+        id: constraints
+        attributes:
+            label: Constraints
+            description: List actual schedule, technical, operational, or policy constraints; use None when there are none.
+            placeholder: |
+                - Schedule constraint:
+                - Essential technical or implementation constraint:
+                - Operational constraint:
+                - Policy constraint:
+                - None
+        validations:
+            required: true

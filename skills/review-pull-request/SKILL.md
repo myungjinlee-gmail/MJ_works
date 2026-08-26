@@ -71,9 +71,13 @@ required operation.
    of the linked issue, necessary consequential policy or documentation, an
    eligible optional supporting tool, or unrelated work. Use only the linked
    GitHub Issue and repository policies as authoritative sources for scope,
-   requirements, and acceptance criteria. A local plan may identify changed
-   paths or provide non-authoritative context, but shall not add requirements or
-   acceptance criteria. For each supporting tool, apply the eligibility,
+   requirements, constraints, and acceptance intent or criteria. A local plan
+   may identify changed paths or provide non-authoritative context, but shall
+   not add requirements, constraints, or acceptance criteria. Do not fail
+   `SCOPE` or create a blocking finding solely because the Pull Request omits or
+   chooses differently on an implementation detail that is neither essential to
+   a required outcome nor specified in the linked issue. For each supporting
+   tool, apply the eligibility,
    separate-issue, lifecycle, and repository or domain precedence rules in
    `docs/process/git_workflow.md`; confirm that every required disclosure
    appears in the Pull Request's `Supporting Tools` section; and include the
@@ -158,6 +162,12 @@ required operation.
 Write only actionable findings caused by the PR. Attach each change request to
 the narrowest relevant changed line. Use a file-level thread only when no single
 line represents the problem.
+
+A blocking finding must trace to an explicit linked-issue requirement or
+constraint, an applicable repository policy, or missing required acceptance
+evidence. Record missing required acceptance evidence under `EVIDENCE` rather
+than failing `SCOPE` when every changed file belongs to an allowed scope
+category.
 
 Because the repository owner may act as both author and reviewer, prefix every
 reviewer-authored review-thread comment, including findings and disputed-finding
